@@ -3,3 +3,4 @@ build
 build_mathlib
 build_release
 release
+.nfs*

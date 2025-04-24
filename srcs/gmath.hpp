@@ -4,7 +4,7 @@
 # include <iostream>
 
 namespace gm {
-	# include <Vec2.hpp>
+	# include <vec2/Vec2i.hpp>
 }
 
 #endif

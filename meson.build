@@ -3,11 +3,15 @@ project('libmath', 'cpp',
 		default_options : ['warning_level=3',
 							'cpp_std=c++14'])
 
-includes = include_directories('include')
+includes = include_directories('srcs')
+
+srcs = [
+	'srcs/gmath.cpp',
+	'srcs/vec2/Vec2i.cpp'
+]
 
 lib = library('math',
-			'srcs/gmath.cpp',
-			'srcs/Vec2.cpp',
+			srcs,
 			include_directories: includes,
 			install : true)
 
@@ -18,8 +22,7 @@ meson.override_dependency('libmath', dep_libmath)
 if get_option('test')
 executable('libmathTest',
 			'srcs/main.cpp',
-			'srcs/gmath.cpp',
-			'srcs/Vec2.cpp',
+			srcs,
 			include_directories: includes,
 			install : true)
 endif
