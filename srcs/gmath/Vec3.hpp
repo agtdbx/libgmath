@@ -149,7 +149,7 @@ public:
 		if (n == 2)
 			return (this->z);
 
-		throw std::runtime_error("Out of vec3 bounds index");
+		throw std::runtime_error("Index out of vec3 bounds");
 	}
 
 	//**** PUBLIC METHODS ******************************************************

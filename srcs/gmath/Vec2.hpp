@@ -121,7 +121,7 @@ public:
 		if (n == 1)
 			return (this->y);
 
-		throw std::runtime_error("Out of vec2 bounds index");
+		throw std::runtime_error("Index out of vec2 bounds");
 	}
 
 private:

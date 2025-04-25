@@ -190,7 +190,7 @@ public:
 		if (n == 3)
 			return (this->w);
 
-		throw std::runtime_error("Out of vec4 bounds index");
+		throw std::runtime_error("Index out of vec4 bounds");
 	}
 
 	//**** PUBLIC METHODS ******************************************************

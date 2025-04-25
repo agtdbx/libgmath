@@ -14,6 +14,7 @@ namespace gm {
 	# include <gmath/Vec4.hpp>
 
 	// Include matrix
+	# include <gmath/Mat2.hpp>
 
 	// Functions
 	template <typename T>
