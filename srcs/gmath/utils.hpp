@@ -1,9 +1,11 @@
 #ifndef UTILS_HPP
 # define UTILS_HPP
 
-//**** FUNCTIONS DEFINE ********************************************************
+//**** VARIABLES ***************************************************************
 
-
+static const double	PI = 3.14159265358979323846;
+static const double	PI_180 = PI / 180;
+static const double	_180_PI = 180 / PI;
 
 //**** FUNCTIONS ***************************************************************
 
@@ -51,22 +53,16 @@ T	pow(T value, unsigned int power)
 
 
 template <typename T>
-T	sqrt(T value)
+T	toRadian(T degree)
 {
-	T	tmp = T();
+	return (degree * PI_180);
+}
 
-	if (value <= tmp)
-		return (tmp);
 
-	T	res = value / 2.0;
-
-	while (res != tmp)
-	{
-		tmp = res;
-		res = (value / tmp + tmp) / 2;
-	}
-
-	return (res);
+template <typename T>
+T	toDegree(T radian)
+{
+	return (radian * _180_PI);
 }
 
 #endif

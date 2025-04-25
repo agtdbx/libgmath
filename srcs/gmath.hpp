@@ -1,6 +1,7 @@
 #ifndef GMATH_HPP
 # define GMATH_HPP
 
+# include <cmath>
 # include <iostream>
 
 namespace gm {

@@ -3,8 +3,9 @@
 
 # define MAT2_SIZE 4
 
-# include <gmath/utils.hpp>
+# include <gmath/Vec2.hpp>
 
+#include <cmath>
 #include <iostream>
 #include <stdexcept>
 
@@ -140,12 +141,39 @@ public:
 		return (this->values[n]);
 	}
 
+	//**** PUBLIC METHODS ******************************************************
+
+	static Mat2<T>	identity(void)
+	{
+		Mat2<T>	res;
+
+		res.values[0]++;
+		res.values[3]++;
+
+		return (res);
+	}
+
+
+	static Mat2<T>	rotation(T radian)
+	{
+		Mat2<T>	res;
+		T		tmpCos = cos(radian);
+		T		tmpSin = sin(radian);
+
+		res.values[0] = tmpCos;
+		res.values[1] = -tmpSin;
+		res.values[2] = tmpSin;
+		res.values[3] = tmpCos;
+
+		return (res);
+	}
+
 private:
 
 };
 
 //**** EXTERNS OPERATORS *******************************************************
-//---- Vector vector operator --------------------------------------------------
+//---- Matrix matrix operator --------------------------------------------------
 
 template <typename T>
 Mat2<T>	operator+(const Mat2<T> &m1, const Mat2<T> &m2)
@@ -166,6 +194,45 @@ Mat2<T>	operator-(const Mat2<T> &m1, const Mat2<T> &m2)
 
 	for (int i = 0; i < MAT2_SIZE; i++)
 		res.values[i] = m1.values[i] - m2.values[i];
+
+	return (res);
+}
+
+
+template <typename T>
+Mat2<T>	operator*(const Mat2<T> &m1, const Mat2<T> &m2)
+{
+	Mat2<T>	res;
+
+	res.values[0] = m1.values[0] * m2.values[0] + m1.values[1] * m2.values[2];
+	res.values[1] = m1.values[0] * m2.values[1] + m1.values[1] * m2.values[3];
+	res.values[2] = m1.values[2] * m2.values[0] + m1.values[3] * m2.values[2];
+	res.values[3] = m1.values[2] * m2.values[1] + m1.values[3] * m2.values[3];
+
+	return (res);
+}
+
+//---- Matrix vector operator --------------------------------------------------
+
+template <typename T>
+Vec2<T>	operator*(const Mat2<T> &mat2, const Vec2<T> &vec2)
+{
+	Vec2<T>	res;
+
+	res.x = mat2.values[0] * vec2.x + mat2.values[1] * vec2.y;
+	res.y = mat2.values[2] * vec2.x + mat2.values[3] * vec2.y;
+
+	return (res);
+}
+
+
+template <typename T>
+Vec2<T>	operator*(const Vec2<T> &vec2, const Mat2<T> &mat2)
+{
+	Vec2<T>	res;
+
+	res.x = mat2.values[0] * vec2.x + mat2.values[1] * vec2.y;
+	res.y = mat2.values[2] * vec2.x + mat2.values[3] * vec2.y;
 
 	return (res);
 }

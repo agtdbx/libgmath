@@ -3,6 +3,7 @@
 
 # include <gmath/utils.hpp>
 
+#include <cmath>
 #include <iostream>
 #include <stdexcept>
 
@@ -192,6 +193,13 @@ Vec2<T>	normalize(const Vec2<T> &vec2)
 	if (dst == T())
 		return (vec2);
 	return (vec2 / dst);
+}
+
+
+template <typename T>
+T	dot(const Vec2<T> &v1, const Vec2<T> &v2)
+{
+	return (v1.x * v2.x + v1.y * v2.y);
 }
 
 //**** STATIC FUNCTIONS ********************************************************

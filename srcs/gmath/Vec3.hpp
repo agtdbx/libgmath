@@ -4,6 +4,7 @@
 # include <gmath/utils.hpp>
 # include <gmath/Vec2.hpp>
 
+#include <cmath>
 #include <iostream>
 #include <stdexcept>
 
@@ -239,6 +240,24 @@ Vec3<T>	normalize(const Vec3<T> &vec3)
 	if (dst == T())
 		return (vec3);
 	return (vec3 / dst);
+}
+
+
+template <typename T>
+T	dot(const Vec3<T> &v1, const Vec3<T> &v2)
+{
+	return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z);
+}
+
+
+template <typename T>
+Vec3<T>	cross(const Vec3<T> &v1, const Vec3<T> &v2)
+{
+	T	x = (v1.y * v2.z) - (v1.z * v2.y);
+	T	y = (v1.z * v2.x) - (v1.x * v2.z);
+	T	z = (v1.x * v2.y) - (v1.y * v2.z);
+
+	return (Vec3<T>(x, y, z));
 }
 
 //**** STATIC FUNCTIONS ********************************************************
