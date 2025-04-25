@@ -19,5 +19,10 @@ int	main(void)
 	std::cout << vec3 << std::endl;
 	std::cout << vec3.xy() << std::endl;
 
+	gm::Vec4d	vec4(vec3, 42);
+	std::cout << vec4 << std::endl;
+	std::cout << vec4.xy() << std::endl;
+	std::cout << vec4.yzw() << std::endl;
+
 	return (0);
 }

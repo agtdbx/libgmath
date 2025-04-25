@@ -64,7 +64,6 @@ public:
 
 	~Vec3()
 	{
-
 	}
 
 	//**** ACCESSORS ***********************************************************
@@ -81,7 +80,7 @@ public:
 
 		this->x = vec3.x;
 		this->y = vec3.y;
-		this->y = vec3.z;
+		this->z = vec3.z;
 
 		return (*this);
 	}
@@ -161,13 +160,13 @@ public:
 	}
 
 
-	Vec2<T>	xz(void)
+	Vec2<T>	yz(void)
 	{
 		return	(Vec2<T>(this->y, this->z));
 	}
 
 
-	Vec2<T>	yz(void)
+	Vec2<T>	xz(void)
 	{
 		return	(Vec2<T>(this->x, this->z));
 	}

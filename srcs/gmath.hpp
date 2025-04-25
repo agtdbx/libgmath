@@ -11,6 +11,7 @@ namespace gm {
 	// Include vectors
 	# include <gmath/Vec2.hpp>
 	# include <gmath/Vec3.hpp>
+	# include <gmath/Vec4.hpp>
 
 	// Include matrix
 
