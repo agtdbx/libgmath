@@ -6,8 +6,7 @@ project('libmath', 'cpp',
 includes = include_directories('srcs')
 
 srcs = [
-	'srcs/gmath.cpp',
-	'srcs/vec2/Vec2i.cpp'
+	'srcs/gmath/random.cpp',
 ]
 
 lib = library('math',
