@@ -10,6 +10,7 @@ namespace gm {
 
 	// Include vectors
 	# include <gmath/Vec2.hpp>
+	# include <gmath/Vec3.hpp>
 
 	// Include matrix
 

@@ -6,7 +6,7 @@ int	main(void)
 
 	std::cout << vec2 << std::endl;
 
-	vec2.r += 2;
+	vec2.x += 2;
 	std::cout << vec2 << std::endl;
 	std::cout << gm::normalize(vec2) << std::endl;
 	std::cout << gm::norm(vec2) << std::endl;
@@ -14,6 +14,10 @@ int	main(void)
 	vec2[1] += 2;
 
 	std::cout << vec2 << std::endl;
+
+	gm::Vec3d	vec3(vec2, 1);
+	std::cout << vec3 << std::endl;
+	std::cout << vec3.xy() << std::endl;
 
 	return (0);
 }

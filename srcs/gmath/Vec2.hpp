@@ -15,20 +15,18 @@ class Vec2
 public:
 	T	x;
 	T	y;
-	T	&r;
-	T	&g;
 
 	//**** INITIALISION ********************************************************
 	//---- Constructors --------------------------------------------------------
 
 	Vec2(void)
-	: x(), y(), r(this->x), g(this->y)
 	{
+		this->x = T();
+		this->y = T();
 	}
 
 
 	Vec2(const Vec2 &vec2)
-	: x(), y(), r(this->x), g(this->y)
 	{
 		this->x = vec2.x;
 		this->y = vec2.y;
@@ -36,7 +34,6 @@ public:
 
 
 	Vec2(T x, T y)
-	: x(), y(), r(this->x), g(this->y)
 	{
 		this->x = x;
 		this->y = y;
@@ -193,7 +190,7 @@ Vec2<T>	normalize(const Vec2<T> &vec2)
 {
 	T	dst = norm(vec2);
 
-	if (dst == 0)
+	if (dst == T())
 		return (vec2);
 	return (vec2 / dst);
 }
@@ -201,6 +198,7 @@ Vec2<T>	normalize(const Vec2<T> &vec2)
 //**** STATIC FUNCTIONS ********************************************************
 
 //**** USINGS ******************************************************************
+
 
 // Vec2
 using Vec2u = Vec2<unsigned int>;
