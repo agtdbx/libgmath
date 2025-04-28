@@ -13,8 +13,15 @@
 #include <stdexcept>
 
 //**** STATIC FUNCTIONS DEFINE *************************************************
-
 //**** CLASS DEFINE ************************************************************
+
+/**
+ * @brief Class for 4x4 matrix.
+ *
+ * @tparam T Type of value in the matrix.
+ *
+ * The class is design to be used with graphic library like OpenGL or Vulkan.
+ */
 template <typename T>
 class Mat4
 {
@@ -24,27 +31,65 @@ public:
 	//**** INITIALISION ********************************************************
 	//---- Constructors --------------------------------------------------------
 
+	/**
+	 * @brief Default constructor of Mat4 class.
+	 *
+	 * @return The Mat4 with values at 0.
+	 */
 	Mat4(void)
 	{
 		for (int i = 0; i < MAT4_SIZE; i++)
 			this->values[i] = T();
 	}
 
-
+	/**
+	 * @brief Copy constructor of Mat4 class.
+	 *
+	 * @param mat4 The Mat4 to copy.
+	 *
+	 * @return The Mat4 copied from parameter.
+	 */
 	Mat4(const Mat4 &mat4)
 	{
 		for (int i = 0; i < MAT4_SIZE; i++)
 			this->values[i] = mat4.values[i];
 	}
 
-
+	/**
+	 * @brief Constructor of Mat4 class from an array.
+	 *
+	 * @param values Values in array form.
+	 *
+	 * @return Mat4 values of the array.
+	 */
 	Mat4(const T values[MAT4_SIZE])
 	{
 		for (int i = 0; i < MAT4_SIZE; i++)
 			this->values[i] = values[i];
 	}
 
-
+	/**
+	 * @brief Constructor of Mat3 class from parameters.
+	 *
+	 * @param x1 Value at (0,0).
+	 * @param x2 Value at (1,0).
+	 * @param x3 Value at (2,0).
+	 * @param x4 Value at (3,0).
+	 * @param y1 Value at (0,1).
+	 * @param y2 Value at (1,1).
+	 * @param y3 Value at (2,1).
+	 * @param y4 Value at (3,1).
+	 * @param z1 Value at (0,2).
+	 * @param z2 Value at (1,2).
+	 * @param z3 Value at (2,2).
+	 * @param z4 Value at (3,2).
+	 * @param w1 Value at (0,3).
+	 * @param w2 Value at (1,3).
+	 * @param w3 Value at (2,3).
+	 * @param w4 Value at (3,3).
+	 *
+	 * @return Mat3 values of parameters.
+	 */
 	Mat4(T x1, T x2, T x3, T x4,
 			T y1, T y2, T y3, T y4,
 			T z1, T z2, T z3, T z4,
@@ -71,7 +116,13 @@ public:
 		this->values[15] = w4;
 	}
 
-
+	/**
+	 * @brief Constructor of Mat4 class from Mat2.
+	 *
+	 * @param mat2 Mat2 to base on.
+	 *
+	 * @return Mat4 with x1, x2, y1 and y2 from mat2, other value to 0.
+	 */
 	Mat4(const Mat2<T> mat2)
 	{
 		this->values[ 0] = mat2.values[0];
@@ -95,7 +146,13 @@ public:
 		this->values[15] = T();
 	}
 
-
+	/**
+	 * @brief Constructor of Mat4 class from Mat3.
+	 *
+	 * @param mat3 Mat3 to base on.
+	 *
+	 * @return Mat4 with x1, x2, x3, y1, y2, y3, z1, z2 and z3 from mat3, other value to 0.
+	 */
 	Mat4(const Mat3<T> mat3)
 	{
 		this->values[ 0] = mat3.values[0];
@@ -128,6 +185,15 @@ public:
 	//**** ACCESSORS ***********************************************************
 	//---- Getters -------------------------------------------------------------
 
+	/**
+	 * @brief Getter of Mat4.
+	 *
+	 * @param x x index, must in range [0, 3].
+	 * @param y y index, must in range [0, 3].
+	 *
+	 * @return The value at position (x,y).
+	 * @exception Throw a runtime_error when x and y isn't in range [0, 3].
+	 */
 	T	get(unsigned int x, unsigned int y) const
 	{
 		if (x >= 4 || y >= 4)
@@ -135,7 +201,16 @@ public:
 		return (this->values[x + y * 4]);
 	}
 
-
+	/**
+	 * @brief Accessor of Mat4.
+	 *
+	 * @warning No check of x and y, will crash if isn't in range [0, 3].
+	 *
+	 * @param x x index, must in range [0, 3].
+	 * @param y y index, must in range [0, 3].
+	 *
+	 * @return The reference of value at position (x,y).
+	 */
 	T	&at(unsigned int x, unsigned int y)
 	{
 		return (this->values[x + y * 4]);
@@ -143,6 +218,15 @@ public:
 
 	//---- Setters -------------------------------------------------------------
 
+	/**
+	 * @brief Setter of Mat4.
+	 *
+	 * @param x x index, must in range [0, 3].
+	 * @param y y index, must in range [0, 3].
+	 * @param value The value to set.
+	 *
+	 * @exception Throw a runtime_error when x and y isn't in range [0, 3].
+	 */
 	void	set(unsigned int x, unsigned int y, const T &value)
 	{
 		if (x >= 4 || y >= 4)
@@ -163,7 +247,6 @@ public:
 		return (*this);
 	}
 
-
 	Mat4	&operator+=(const Mat4 &mat4)
 	{
 		for (int i = 0; i < MAT4_SIZE; i++)
@@ -171,7 +254,6 @@ public:
 
 		return (*this);
 	}
-
 
 	Mat4	&operator-=(const Mat4 &mat4)
 	{
@@ -181,7 +263,6 @@ public:
 		return (*this);
 	}
 
-
 	Mat4	&operator*=(const T &value)
 	{
 		for (int i = 0; i < MAT4_SIZE; i++)
@@ -189,7 +270,6 @@ public:
 
 		return (*this);
 	}
-
 
 	Mat4	&operator/=(const T &value)
 	{
@@ -210,7 +290,6 @@ public:
 		return (true);
 	}
 
-
 	bool	operator!=(const Mat4 &mat4) const
 	{
 		for (int i = 0; i < MAT4_SIZE; i++)
@@ -222,6 +301,14 @@ public:
 
 	//---- Accessor Operators --------------------------------------------------
 
+	/**
+	 * @brief Access values by index.
+	 *
+	 * @param n The id of value in array style. Id is (x + y * 4).
+	 *
+	 * @return The reference of value at array position n.
+	 * @exception Throw a runtime_error if n isn't in range [0, 15].
+	 */
 	T	&operator[](unsigned int n)
 	{
 		if (n >= MAT4_SIZE)
@@ -230,7 +317,15 @@ public:
 		return (this->values[n]);
 	}
 
-
+	/**
+	 * @brief Access values by index.
+	 *
+	 * @warning No check of x and y, will crash if isn't in range [0, 3].
+	 *
+	 * @param vec2 The index of value in Vec2u.
+	 *
+	 * @return The reference of value at position (x,y).
+	 */
 	T	&operator[](const Vec2u &vec2)
 	{
 		return (this->values[vec2.x + vec2.y * 4]);
@@ -238,6 +333,11 @@ public:
 
 	//**** PUBLIC METHODS ******************************************************
 
+	/**
+	 * @brief Create a Mat2 from a subpart of the Mat4.
+	 *
+	 * @return A Mat2 with x1, x2, y1 and y2 as values.
+	 */
 	Mat2<T>	asMat2(void) const
 	{
 		Mat2<T>	res;
@@ -250,7 +350,11 @@ public:
 		return (res);
 	}
 
-
+	/**
+	 * @brief Create a Mat3 from a subpart of the Mat4.
+	 *
+	 * @return A Mat3 with x1, x2, x3, y1, y2, y3, z1, z2 and z3 as values.
+	 */
 	Mat3<T>	asMat3(void) const
 	{
 		Mat3<T>	res;
@@ -270,6 +374,11 @@ public:
 
 	//**** STATIC METHODS ******************************************************
 
+	/**
+	 * @brief Create the 4x4 identity matrix.
+	 *
+	 * @return 4x4 identity matrix.
+	 */
 	static Mat4<T>	identity(void)
 	{
 		Mat4<T>	res;
@@ -282,7 +391,14 @@ public:
 		return (res);
 	}
 
-
+	/**
+	 * @brief Create 4x4 rotation matrix for 3D rotation (w values are 0).
+	 *
+	 * @param axis Vec3 to tell on wich axis the rotation will be done. It must be normalized.
+	 * @param radians The angle in radians.
+	 *
+	 * @return 4x4 rotation matrix of parameter.
+	 */
 	static Mat4<T>	rotation3D(const Vec3<T> &axis, T radian)
 	{
 		Mat4<T>	res;
@@ -317,7 +433,14 @@ public:
 		return (res);
 	}
 
-
+	/**
+	 * @brief Create 4x4 perceptive matrix.
+	 *
+	 * @param fovY The fov for camera height.
+	 * @param ratio The ratio of the screen (width / height).
+	 * @param near The closest distance in camera vison.
+	 * @param far The farest distance in camera vison.
+	 */
 	static Mat4<T>	perceptive(T fovY, T ratio, T near, T far)
 	{
 		Mat4<T>	res;
@@ -338,7 +461,13 @@ public:
 		return (res);
 	}
 
-
+	/**
+	 * @brief Create a 4x4 model matrix.
+	 *
+	 * @param eye Position of the camera.
+	 * @param center Position of the model.
+	 * @param up Camera up direction normalize. Typically (0, 0, 1).
+	 */
 	static Mat4<T>	lookAt(const Vec3<T> &eye, const Vec3<T> &center, const Vec3<T> &up)
 	{
 		const Vec3<T>	f(normalize(center - eye));
@@ -383,7 +512,6 @@ Mat4<T>	operator+(const Mat4<T> &m1, const Mat4<T> &m2)
 	return (res);
 }
 
-
 template <typename T>
 Mat4<T>	operator-(const Mat4<T> &m1, const Mat4<T> &m2)
 {
@@ -395,28 +523,35 @@ Mat4<T>	operator-(const Mat4<T> &m1, const Mat4<T> &m2)
 	return (res);
 }
 
-
+/**
+ * @brief Matrix multiplication between 2 Mat4.
+ *
+ * @param m1 First matrix.
+ * @param m2 Second matrix.
+ *
+ * @return Result of m1 * m2.
+ */
 template <typename T>
 Mat4<T>	operator*(const Mat4<T> &m1, const Mat4<T> &m2)
 {
 	Mat4<T>	res;
 
-	res.values[0] = m1.values[0] * m2.values[0] + m1.values[1] * m2.values[4] + m1.values[2] * m2.values[8] + m1.values[3] * m2.values[12];
-	res.values[1] = m1.values[0] * m2.values[1] + m1.values[1] * m2.values[5] + m1.values[2] * m2.values[9] + m1.values[3] * m2.values[13];
-	res.values[2] = m1.values[0] * m2.values[2] + m1.values[1] * m2.values[6] + m1.values[2] * m2.values[10] + m1.values[3] * m2.values[14];
-	res.values[3] = m1.values[0] * m2.values[3] + m1.values[1] * m2.values[7] + m1.values[2] * m2.values[11] + m1.values[3] * m2.values[15];
-	res.values[4] = m1.values[4] * m2.values[0] + m1.values[5] * m2.values[4] + m1.values[6] * m2.values[8] + m1.values[7] * m2.values[12];
-	res.values[5] = m1.values[4] * m2.values[1] + m1.values[5] * m2.values[5] + m1.values[6] * m2.values[9] + m1.values[7] * m2.values[13];
-	res.values[6] = m1.values[4] * m2.values[2] + m1.values[5] * m2.values[6] + m1.values[6] * m2.values[10] + m1.values[7] * m2.values[14];
-	res.values[7] = m1.values[4] * m2.values[3] + m1.values[5] * m2.values[7] + m1.values[6] * m2.values[11] + m1.values[7] * m2.values[15];
-	res.values[8] = m1.values[8] * m2.values[0] + m1.values[9] * m2.values[4] + m1.values[10] * m2.values[8] + m1.values[11] * m2.values[12];
-	res.values[9] = m1.values[8] * m2.values[1] + m1.values[9] * m2.values[5] + m1.values[10] * m2.values[9] + m1.values[11] * m2.values[13];
-	res.values[10] = m1.values[8] * m2.values[2] + m1.values[9] * m2.values[6] + m1.values[10] * m2.values[10] + m1.values[11] * m2.values[14];
-	res.values[11] = m1.values[8] * m2.values[3] + m1.values[9] * m2.values[7] + m1.values[10] * m2.values[11] + m1.values[11] * m2.values[15];
-	res.values[12] = m1.values[12] * m2.values[0] + m1.values[13] * m2.values[4] + m1.values[14] * m2.values[8] + m1.values[15] * m2.values[12];
-	res.values[13] = m1.values[12] * m2.values[1] + m1.values[13] * m2.values[5] + m1.values[14] * m2.values[9] + m1.values[15] * m2.values[13];
-	res.values[14] = m1.values[12] * m2.values[2] + m1.values[13] * m2.values[6] + m1.values[14] * m2.values[10] + m1.values[15] * m2.values[14];
-	res.values[15] = m1.values[12] * m2.values[3] + m1.values[13] * m2.values[7] + m1.values[14] * m2.values[11] + m1.values[15] * m2.values[15];
+	res.values[ 0] = m1.values[ 0] * m2.values[ 0] + m1.values[ 1] * m2.values[ 4] + m1.values[ 2] * m2.values[ 8] + m1.values[ 3] * m2.values[12];
+	res.values[ 1] = m1.values[ 0] * m2.values[ 1] + m1.values[ 1] * m2.values[ 5] + m1.values[ 2] * m2.values[ 9] + m1.values[ 3] * m2.values[13];
+	res.values[ 2] = m1.values[ 0] * m2.values[ 2] + m1.values[ 1] * m2.values[ 6] + m1.values[ 2] * m2.values[10] + m1.values[ 3] * m2.values[14];
+	res.values[ 3] = m1.values[ 0] * m2.values[ 3] + m1.values[ 1] * m2.values[ 7] + m1.values[ 2] * m2.values[11] + m1.values[ 3] * m2.values[15];
+	res.values[ 4] = m1.values[ 4] * m2.values[ 0] + m1.values[ 5] * m2.values[ 4] + m1.values[ 6] * m2.values[ 8] + m1.values[ 7] * m2.values[12];
+	res.values[ 5] = m1.values[ 4] * m2.values[ 1] + m1.values[ 5] * m2.values[ 5] + m1.values[ 6] * m2.values[ 9] + m1.values[ 7] * m2.values[13];
+	res.values[ 6] = m1.values[ 4] * m2.values[ 2] + m1.values[ 5] * m2.values[ 6] + m1.values[ 6] * m2.values[10] + m1.values[ 7] * m2.values[14];
+	res.values[ 7] = m1.values[ 4] * m2.values[ 3] + m1.values[ 5] * m2.values[ 7] + m1.values[ 6] * m2.values[11] + m1.values[ 7] * m2.values[15];
+	res.values[ 8] = m1.values[ 8] * m2.values[ 0] + m1.values[ 9] * m2.values[ 4] + m1.values[10] * m2.values[ 8] + m1.values[11] * m2.values[12];
+	res.values[ 9] = m1.values[ 8] * m2.values[ 1] + m1.values[ 9] * m2.values[ 5] + m1.values[10] * m2.values[ 9] + m1.values[11] * m2.values[13];
+	res.values[10] = m1.values[ 8] * m2.values[ 2] + m1.values[ 9] * m2.values[ 6] + m1.values[10] * m2.values[10] + m1.values[11] * m2.values[14];
+	res.values[11] = m1.values[ 8] * m2.values[ 3] + m1.values[ 9] * m2.values[ 7] + m1.values[10] * m2.values[11] + m1.values[11] * m2.values[15];
+	res.values[12] = m1.values[12] * m2.values[ 0] + m1.values[13] * m2.values[ 4] + m1.values[14] * m2.values[ 8] + m1.values[15] * m2.values[12];
+	res.values[13] = m1.values[12] * m2.values[ 1] + m1.values[13] * m2.values[ 5] + m1.values[14] * m2.values[ 9] + m1.values[15] * m2.values[13];
+	res.values[14] = m1.values[12] * m2.values[ 2] + m1.values[13] * m2.values[ 6] + m1.values[14] * m2.values[10] + m1.values[15] * m2.values[14];
+	res.values[15] = m1.values[12] * m2.values[ 3] + m1.values[13] * m2.values[ 7] + m1.values[14] * m2.values[11] + m1.values[15] * m2.values[15];
 
 	return (res);
 }
@@ -434,7 +569,6 @@ Mat4<T>	operator*(const Mat4<T> &mat4, const T &value)
 	return (res);
 }
 
-
 template <typename T>
 Mat4<T>	operator*(const T &value, const Mat4<T> &mat4)
 {
@@ -445,7 +579,6 @@ Mat4<T>	operator*(const T &value, const Mat4<T> &mat4)
 
 	return (res);
 }
-
 
 template <typename T>
 Mat4<T>	operator/(const Mat4<T> &mat4, const T &value)
@@ -472,14 +605,49 @@ std::ostream	&operator<<(std::ostream &os, const Mat4<T> &mat4)
 
 //**** FUNCTIONS ***************************************************************
 
-//**** STATIC FUNCTIONS ********************************************************
+/**
+ * @brief Rotate a Mat4 in 3D.
+ *
+ * @param mat4 The Mat4 to rotate.
+ * @param axis Vec3 to tell on wich axis the rotation will be done. It must be normalized.
+ * @param radians The angle in radians.
+ *
+ * @return Mat4 rotate by axis and angle in radians in 3D.
+ */
+template <typename T>
+Mat4<T>	rotate(const Mat4<T> &mat4, const Vec3<T> &axis, T radians)
+{
+	const Mat4<T>	matRot = Mat4<T>::rotation(axis, radians);
 
+	return (mat4 * matRot);
+}
+
+//**** STATIC FUNCTIONS ********************************************************
 //**** USINGS ******************************************************************
 
-// Mat4
+/**
+ * @brief Class for 4x4 unsigned int matrix.
+ *
+ * The class is design to be used with graphic library like OpenGL or Vulkan.
+ */
 using Mat4u = Mat4<unsigned int>;
+/**
+ * @brief Class for 4x4 int matrix.
+ *
+ * The class is design to be used with graphic library like OpenGL or Vulkan.
+ */
 using Mat4i = Mat4<int>;
+/**
+ * @brief Class for 4x4 float matrix.
+ *
+ * The class is design to be used with graphic library like OpenGL or Vulkan.
+ */
 using Mat4f = Mat4<float>;
+/**
+ * @brief Class for 4x4 double matrix.
+ *
+ * The class is design to be used with graphic library like OpenGL or Vulkan.
+ */
 using Mat4d = Mat4<double>;
 
 #endif

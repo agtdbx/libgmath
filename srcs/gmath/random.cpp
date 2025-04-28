@@ -12,7 +12,11 @@ static const double	RAND_MAX_D = static_cast<double>(RAND_MAX);
 
 unsigned int	initRandom(void)
 {
-	srand(time(NULL));
+	unsigned int	seed = time(NULL);
+
+	srand(seed);
+
+	return (seed);
 }
 
 

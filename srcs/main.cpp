@@ -1,12 +1,21 @@
 #include <gmath.hpp>
 
+#include <vector>
+
 int	main(void)
 {
+	std::vector<int>	uwu;
+
+	uwu.push_back(0);
+	uwu[0] = 1;
+
 	{
 		gm::Vec2i vec2(4, 2);
 
 		std::cout << vec2 << std::endl;
 		std::cout << norm(vec2) << std::endl;
+
+		gm::lerp(1, 1, 1.0f);
 
 		gm::Mat2i	m2(1, 2, 3, 4);
 
@@ -20,7 +29,7 @@ int	main(void)
 
 	{
 		gm::Vec2f vec2(1, 0);
-		float	radian = gm::toRadian(180.0f);
+		float	radian = gm::radians(180.0f);
 
 		std::cout << vec2 << std::endl;
 		vec2 = vec2 * gm::Mat2f::rotation(radian);
@@ -34,7 +43,7 @@ int	main(void)
 		std::cout << gm::Mat3f::identity() << std::endl;
 		std::cout << mat3 * gm::Mat3f::identity() << std::endl;
 
-		float	radian = gm::toRadian(90.0f);
+		float	radian = gm::radians(90.0f);
 		gm::Vec3f	pos(0, 0, 1);
 		gm::Vec3f	axis(0, 1, 0);
 		gm::Mat3f	rot = gm::Mat3f::rotation(axis, radian);

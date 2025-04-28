@@ -6,7 +6,6 @@
 #include <stdexcept>
 
 //**** STATIC FUNCTIONS DEFINE *************************************************
-
 //**** CLASS DEFINE ************************************************************
 
 /**
@@ -14,7 +13,7 @@
  *
  * @tparam T Type of value in the vector.
  *
- * The class is design to be used with graphic librarie like OpenGL or Vulkan.
+ * The class is design to be used with graphic librairy like OpenGL or Vulkan.
  */
 template <typename T>
 class Vec2
@@ -26,20 +25,38 @@ public:
 	//**** INITIALISION ********************************************************
 	//---- Constructors --------------------------------------------------------
 
+	/**
+	 * @brief Default constructor of Vec2 class.
+	 *
+	 * @return The Vec2 with values at 0.
+	 */
 	Vec2(void)
 	{
 		this->x = T();
 		this->y = T();
 	}
 
-
+	/**
+	 * @brief Copy constructor of Vec2 class.
+	 *
+	 * @param vec2 The Vec2 to copy.
+	 *
+	 * @return The Vec2 copied from parameter.
+	 */
 	Vec2(const Vec2 &vec2)
 	{
 		this->x = vec2.x;
 		this->y = vec2.y;
 	}
 
-
+	/**
+	 * @brief Constructor of Vec2 class.
+	 *
+	 * @param x x value of the Vec2.
+	 * @param y y value of the Vec2.
+	 *
+	 * @return The Vec2 with parameter values.
+	 */
 	Vec2(T x, T y)
 	{
 		this->x = x;
@@ -54,9 +71,7 @@ public:
 
 	//**** ACCESSORS ***********************************************************
 	//---- Getters -------------------------------------------------------------
-
 	//---- Setters -------------------------------------------------------------
-
 	//---- Modify Operators ----------------------------------------------------
 
 	Vec2	&operator=(const Vec2 &vec2)
@@ -70,7 +85,6 @@ public:
 		return (*this);
 	}
 
-
 	Vec2	&operator+=(const Vec2 &vec2)
 	{
 		this->x += vec2.x;
@@ -78,7 +92,6 @@ public:
 
 		return (*this);
 	}
-
 
 	Vec2	&operator-=(const Vec2 &vec2)
 	{
@@ -88,7 +101,6 @@ public:
 		return (*this);
 	}
 
-
 	Vec2	&operator*=(const T &value)
 	{
 		this->x *= value;
@@ -96,7 +108,6 @@ public:
 
 		return (*this);
 	}
-
 
 	Vec2	&operator/=(const T &value)
 	{
@@ -113,7 +124,6 @@ public:
 		return (this->x == vec2.x && this->y == vec2.y);
 	}
 
-
 	bool	operator!=(const Vec2 &vec2) const
 	{
 		return (this->x != vec2.x || this->y != vec2.y);
@@ -121,6 +131,18 @@ public:
 
 	//---- Accessor Operators --------------------------------------------------
 
+	/**
+	 * @brief Access values by index.
+	 *
+	 * Index 0 is for x.
+	 * Index 1 is for y.
+	 * Other index will return an exception.
+	 *
+	 * @param n Index of the value wanted.
+	 *
+	 * @return The value at the index.
+	 * @exception Throw runtime_error when index is greater than 1.
+	 */
 	T	&operator[](unsigned int n)
 	{
 		if (n == 0)
@@ -144,7 +166,6 @@ Vec2<T>	operator+(const Vec2<T> &v1, const Vec2<T> &v2)
 	return (Vec2<T>(v1.x + v2.x, v1.y + v2.y));
 }
 
-
 template <typename T>
 Vec2<T>	operator-(const Vec2<T> &v1, const Vec2<T> &v2)
 {
@@ -159,13 +180,11 @@ Vec2<T>	operator*(const Vec2<T> &vec2, const T &value)
 	return (Vec2<T>(vec2.x * value, vec2.y * value));
 }
 
-
 template <typename T>
 Vec2<T>	operator*(const T &value, const Vec2<T> &vec2)
 {
 	return (Vec2<T>(vec2.x * value, vec2.y * value));
 }
-
 
 template <typename T>
 Vec2<T>	operator/(const Vec2<T> &vec2, const T &value)
@@ -184,24 +203,58 @@ std::ostream	&operator<<(std::ostream &os, const Vec2<T> &vec2)
 
 //**** FUNCTIONS ***************************************************************
 
+/**
+ * @brief Get Vec2 norm.
+ *
+ * @param vec2 Vec2 to get the norm.
+ *
+ * @return Norm of vec2.
+ */
 template <typename T>
 T	norm(const Vec2<T> &vec2)
 {
-	return (sqrt(vec2.x * vec2.x + vec2.y * vec2.y));
+	return (static_cast<T>(sqrt(static_cast<double>(vec2.x * vec2.x
+													+ vec2.y * vec2.y))));
 }
 
+/**
+ * @brief Get Vec2 norm squared.
+ *
+ * @param vec2 Vec2 to get the norm squared.
+ *
+ * @return Norm squared of vec2.
+ */
+template <typename T>
+T	norm2(const Vec2<T> &vec2)
+{
+	return (vec2.x * vec2.x + vec2.y * vec2.y);
+}
 
+/**
+ * @brief Normalize a Vec2.
+ *
+ * @param vec2 Vec2 to normalize.
+ *
+ * @return Normalised vec2, or vec2 if it's norm is 0.
+ */
 template <typename T>
 Vec2<T>	normalize(const Vec2<T> &vec2)
 {
-	T	dst = norm(vec2);
+	T	dst = norm2(vec2);
 
-	if (dst == static_cast<T>(0))
+	if (dst == static_cast<T>(0) || dst == static_cast<T>(1))
 		return (vec2);
-	return (vec2 / dst);
+	return (vec2 / static_cast<T>(sqrt(static_cast<double>(dst))));
 }
 
-
+/**
+ * @brief Dot product between two Vec2.
+ *
+ * @param v1 First Vec2.
+ * @param v2 Second Vec2.
+ *
+ * @return Dot product of v1 with v2.
+ */
 template <typename T>
 T	dot(const Vec2<T> &v1, const Vec2<T> &v2)
 {
@@ -209,20 +262,59 @@ T	dot(const Vec2<T> &v1, const Vec2<T> &v2)
 }
 
 //**** STATIC FUNCTIONS ********************************************************
-
 //**** USINGS ******************************************************************
+//---- VEC2 --------------------------------------------------------------------
 
-
-// Vec2
+/**
+ * @brief Class for 2d unsigned int vector.
+ *
+ * The class is design to be used with graphic librairy like OpenGL or Vulkan.
+ */
 using Vec2u = Vec2<unsigned int>;
+/**
+ * @brief Class for 2d int vector.
+ *
+ * The class is design to be used with graphic librairy like OpenGL or Vulkan.
+ */
 using Vec2i = Vec2<int>;
+/**
+ * @brief Class for 2d float vector.
+ *
+ * The class is design to be used with graphic librairy like OpenGL or Vulkan.
+ */
 using Vec2f = Vec2<float>;
+/**
+ * @brief Class for 2d double vector.
+ *
+ * The class is design to be used with graphic librairy like OpenGL or Vulkan.
+ */
 using Vec2d = Vec2<double>;
 
-// Point2
+//---- POINT2 ------------------------------------------------------------------
+
+/**
+ * @brief Class for 2d unsigned int vector.
+ *
+ * The class is design to be used with graphic librairy like OpenGL or Vulkan.
+ */
 using Point2u = Vec2<unsigned int>;
+/**
+ * @brief Class for 2d int vector.
+ *
+ * The class is design to be used with graphic librairy like OpenGL or Vulkan.
+ */
 using Point2i = Vec2<int>;
+/**
+ * @brief Class for 2d float vector.
+ *
+ * The class is design to be used with graphic librairy like OpenGL or Vulkan.
+ */
 using Point2f = Vec2<float>;
+/**
+ * @brief Class for 2d double vector.
+ *
+ * The class is design to be used with graphic librairy like OpenGL or Vulkan.
+ */
 using Point2d = Vec2<double>;
 
 #endif
