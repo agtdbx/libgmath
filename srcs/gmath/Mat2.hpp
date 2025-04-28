@@ -3,8 +3,6 @@
 
 # define MAT2_SIZE 4
 
-# include <gmath/Vec2.hpp>
-
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
@@ -143,12 +141,14 @@ public:
 
 	//**** PUBLIC METHODS ******************************************************
 
+	//**** STATIC METHODS ******************************************************
+
 	static Mat2<T>	identity(void)
 	{
 		Mat2<T>	res;
 
-		res.values[0]++;
-		res.values[3]++;
+		res.values[0] = T(1);
+		res.values[3] = T(1);
 
 		return (res);
 	}
@@ -212,32 +212,7 @@ Mat2<T>	operator*(const Mat2<T> &m1, const Mat2<T> &m2)
 	return (res);
 }
 
-//---- Matrix vector operator --------------------------------------------------
-
-template <typename T>
-Vec2<T>	operator*(const Mat2<T> &mat2, const Vec2<T> &vec2)
-{
-	Vec2<T>	res;
-
-	res.x = mat2.values[0] * vec2.x + mat2.values[1] * vec2.y;
-	res.y = mat2.values[2] * vec2.x + mat2.values[3] * vec2.y;
-
-	return (res);
-}
-
-
-template <typename T>
-Vec2<T>	operator*(const Vec2<T> &vec2, const Mat2<T> &mat2)
-{
-	Vec2<T>	res;
-
-	res.x = mat2.values[0] * vec2.x + mat2.values[1] * vec2.y;
-	res.y = mat2.values[2] * vec2.x + mat2.values[3] * vec2.y;
-
-	return (res);
-}
-
-//---- Vector value operator ---------------------------------------------------
+//---- Matrix value operator ---------------------------------------------------
 
 template <typename T>
 Mat2<T>	operator*(const Mat2<T> &mat2, const T &value)

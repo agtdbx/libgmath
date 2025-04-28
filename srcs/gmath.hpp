@@ -16,6 +16,11 @@ namespace gm {
 
 	// Include matrix
 	# include <gmath/Mat2.hpp>
+	# include <gmath/Mat3.hpp>
+	# include <gmath/Mat4.hpp>
+
+	// Vector matrix operations
+	# include <gmath/VecMat.hpp>
 
 	// Functions
 	template <typename T>
@@ -29,7 +34,6 @@ namespace gm {
 	{
 		return (start + (end - start) * range);
 	}
-
 }
 
 #endif
