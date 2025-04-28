@@ -128,7 +128,27 @@ public:
 	//**** ACCESSORS ***********************************************************
 	//---- Getters -------------------------------------------------------------
 
+	T	get(unsigned int x, unsigned int y) const
+	{
+		if (x >= 4 || y >= 4)
+			throw std::runtime_error("Index out of mat4 bounds");
+		return (this->values[x + y * 4]);
+	}
+
+
+	T	&at(unsigned int x, unsigned int y)
+	{
+		return (this->values[x + y * 4]);
+	}
+
 	//---- Setters -------------------------------------------------------------
+
+	void	set(unsigned int x, unsigned int y, const T &value)
+	{
+		if (x >= 4 || y >= 4)
+			throw std::runtime_error("Index out of mat4 bounds");
+		this->values[x + y * 4] = value;
+	}
 
 	//---- Modify Operators ----------------------------------------------------
 
@@ -210,6 +230,14 @@ public:
 		return (this->values[n]);
 	}
 
+
+	T	&operator[](const Vec2u &vec2)
+	{
+		if (vec2.x >= 4 || vec2.y >= 4)
+			throw std::runtime_error("Index out of mat4 bounds");
+		return (this->values[vec2.x + vec2.y * 4]);
+	}
+
 	//**** PUBLIC METHODS ******************************************************
 
 	Mat2<T>	asMat2(void) const
@@ -248,10 +276,10 @@ public:
 	{
 		Mat4<T>	res;
 
-		res.values[0] = T(1);
-		res.values[5] = T(1);
-		res.values[10] = T(1);
-		res.values[15] = T(1);
+		res.values[0] = static_cast<T>(1);
+		res.values[5] = static_cast<T>(1);
+		res.values[10] = static_cast<T>(1);
+		res.values[15] = static_cast<T>(1);
 
 		return (res);
 	}
@@ -262,7 +290,7 @@ public:
 		Mat4<T>	res;
 		T		tmpCos = cos(radian);
 		T		tmpSin = sin(radian);
-		T		invTmpCos = T(1) - tmpCos;
+		T		invTmpCos = static_cast<T>(1) - tmpCos;
 		T		tmpSinAx = tmpSin * axis.x;
 		T		tmpSinAy = tmpSin * axis.y;
 		T		tmpSinAz = tmpSin * axis.z;
@@ -286,7 +314,7 @@ public:
 		res.values[12] = T();
 		res.values[13] = T();
 		res.values[14] = T();
-		res.values[15] = T(1);
+		res.values[15] = static_cast<T>(1);
 
 		return (res);
 	}
@@ -296,17 +324,45 @@ public:
 	{
 		Mat4<T>	res;
 
-		// Remap z in range [0, 1]
-		res.values[10] = - (far / (far - near));
-		res.values[11] = - ((far * near) / (far - near));
-
 		// Compute fov
-		T	tanFov = tan(toRadian(fovY / T(2.0)));
+		T	tanFov = tan(toRadian(fovY / static_cast<T>(2)));
 
 		// Scaling factor x * ratio because fov is for y
-		res.values[0] = T(1.0) / (tanFov * ratio);
+		res.values[0] = static_cast<T>(1) / (tanFov * ratio);
 		// Scaling factor y
-		res.values[5] = T(1.0) / tanFov;
+		res.values[5] = static_cast<T>(1) / tanFov;
+
+		// Remap z in range [0, 1]
+		res.values[10] = far / (far - near);
+		res.values[11] = - static_cast<T>(1);
+		res.values[14] = - ((far * near) / (far - near));
+
+		return (res);
+	}
+
+
+	static Mat4<T>	lookAt(const Vec3<T> &eye, const Vec3<T> &center, const Vec3<T> &up)
+	{
+		const Vec3<T>	f(normalize(center - eye));
+		const Vec3<T>	s(normalize(cross(f, up)));
+		const Vec3<T>	u(cross(s, f));
+
+		Mat4<T>	res;
+
+		res.values[ 0] = s.x;
+		res.values[ 1] = s.y;
+		res.values[ 2] = s.z;
+		res.values[ 3] = -dot(s, eye);
+
+		res.values[ 4] = u.x;
+		res.values[ 5] = u.y;
+		res.values[ 6] = u.z;
+		res.values[ 7] = -dot(u, eye);
+
+		res.values[ 8] = -f.x;
+		res.values[ 9] = -f.y;
+		res.values[10] = -f.z;
+		res.values[11] = dot(f, eye);
 
 		return (res);
 	}

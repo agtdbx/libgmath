@@ -3,6 +3,8 @@
 
 # define MAT2_SIZE 4
 
+# include <gmath/Vec2.hpp>
+
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
@@ -57,7 +59,27 @@ public:
 	//**** ACCESSORS ***********************************************************
 	//---- Getters -------------------------------------------------------------
 
+	T	get(unsigned int x, unsigned int y) const
+	{
+		if (x >= 2 || y >= 2)
+			throw std::runtime_error("Index out of mat2 bounds");
+		return (this->values[x + y * 2]);
+	}
+
+
+	T	&at(unsigned int x, unsigned int y)
+	{
+		return (this->values[x + y * 2]);
+	}
+
 	//---- Setters -------------------------------------------------------------
+
+	void	set(unsigned int x, unsigned int y, const T &value)
+	{
+		if (x >= 2 || y >= 2)
+			throw std::runtime_error("Index out of mat2 bounds");
+		this->values[x + y * 2] = value;
+	}
 
 	//---- Modify Operators ----------------------------------------------------
 
@@ -139,6 +161,14 @@ public:
 		return (this->values[n]);
 	}
 
+
+	T	&operator[](const Vec2u &vec2)
+	{
+		if (vec2.x >= 2 || vec2.y >= 2)
+			throw std::runtime_error("Index out of mat2 bounds");
+		return (this->values[vec2.x + vec2.y * 2]);
+	}
+
 	//**** PUBLIC METHODS ******************************************************
 
 	//**** STATIC METHODS ******************************************************
@@ -147,8 +177,8 @@ public:
 	{
 		Mat2<T>	res;
 
-		res.values[0] = T(1);
-		res.values[3] = T(1);
+		res.values[0] = static_cast<T>(1);
+		res.values[3] = static_cast<T>(1);
 
 		return (res);
 	}

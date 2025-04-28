@@ -79,7 +79,27 @@ public:
 	//**** ACCESSORS ***********************************************************
 	//---- Getters -------------------------------------------------------------
 
+	T	get(unsigned int x, unsigned int y) const
+	{
+		if (x >= 3 || y >= 3)
+			throw std::runtime_error("Index out of mat3 bounds");
+		return (this->values[x + y * 3]);
+	}
+
+
+	T	&at(unsigned int x, unsigned int y)
+	{
+		return (this->values[x + y * 3]);
+	}
+
 	//---- Setters -------------------------------------------------------------
+
+	void	set(unsigned int x, unsigned int y, const T &value)
+	{
+		if (x >= 3 || y >= 3)
+			throw std::runtime_error("Index out of mat3 bounds");
+		this->values[x + y * 3] = value;
+	}
 
 	//---- Modify Operators ----------------------------------------------------
 
@@ -161,6 +181,14 @@ public:
 		return (this->values[n]);
 	}
 
+
+	T	&operator[](const Vec2u &vec2)
+	{
+		if (vec2.x >= 3 || vec2.y >= 3)
+			throw std::runtime_error("Index out of mat3 bounds");
+		return (this->values[vec2.x + vec2.y * 3]);
+	}
+
 	//**** PUBLIC METHODS ******************************************************
 
 	Mat2<T>	asMat2(void) const
@@ -181,9 +209,9 @@ public:
 	{
 		Mat3<T>	res;
 
-		res.values[0] = T(1);
-		res.values[4] = T(1);
-		res.values[8] = T(1);
+		res.values[0] = static_cast<T>(1);
+		res.values[4] = static_cast<T>(1);
+		res.values[8] = static_cast<T>(1);
 
 		return (res);
 	}
@@ -194,7 +222,7 @@ public:
 		Mat3<T>	res;
 		T		tmpCos = cos(radian);
 		T		tmpSin = sin(radian);
-		T		invTmpCos = T(1) - tmpCos;
+		T		invTmpCos = static_cast<T>(1) - tmpCos;
 		T		tmpSinAx = tmpSin * axis.x;
 		T		tmpSinAy = tmpSin * axis.y;
 		T		tmpSinAz = tmpSin * axis.z;

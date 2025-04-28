@@ -11,6 +11,8 @@ int	main(void)
 		gm::Mat2i	m2(1, 2, 3, 4);
 
 		std::cout << m2 << std::endl;
+		m2[gm::Vec2u(0, 1)] = 5;
+		std::cout << m2 << std::endl;
 		std::cout << m2 + gm::Mat2i::identity() << std::endl;
 		std::cout << m2 * 2 << std::endl;
 		std::cout << (vec2 * gm::Mat2i::identity()) << std::endl;
