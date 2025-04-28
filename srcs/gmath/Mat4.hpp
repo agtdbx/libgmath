@@ -233,8 +233,6 @@ public:
 
 	T	&operator[](const Vec2u &vec2)
 	{
-		if (vec2.x >= 4 || vec2.y >= 4)
-			throw std::runtime_error("Index out of mat4 bounds");
 		return (this->values[vec2.x + vec2.y * 4]);
 	}
 
@@ -325,7 +323,7 @@ public:
 		Mat4<T>	res;
 
 		// Compute fov
-		T	tanFov = tan(toRadian(fovY / static_cast<T>(2)));
+		T	tanFov = tan(radians(fovY / static_cast<T>(2)));
 
 		// Scaling factor x * ratio because fov is for y
 		res.values[0] = static_cast<T>(1) / (tanFov * ratio);

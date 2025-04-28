@@ -1,8 +1,6 @@
 #ifndef VEC2_HPP
 # define VEC2_HPP
 
-# include <gmath/utils.hpp>
-
 #include <cmath>
 #include <iostream>
 #include <stdexcept>
@@ -10,6 +8,14 @@
 //**** STATIC FUNCTIONS DEFINE *************************************************
 
 //**** CLASS DEFINE ************************************************************
+
+/**
+ * @brief Class for 2d vector.
+ *
+ * @tparam T Type of value in the vector.
+ *
+ * The class is design to be used with graphic librarie like OpenGL or Vulkan.
+ */
 template <typename T>
 class Vec2
 {
@@ -190,7 +196,7 @@ Vec2<T>	normalize(const Vec2<T> &vec2)
 {
 	T	dst = norm(vec2);
 
-	if (dst == T())
+	if (dst == static_cast<T>(0))
 		return (vec2);
 	return (vec2 / dst);
 }

@@ -1,7 +1,6 @@
 #ifndef VEC3_HPP
 # define VEC3_HPP
 
-# include <gmath/utils.hpp>
 # include <gmath/Vec2.hpp>
 
 #include <cmath>
@@ -237,7 +236,7 @@ Vec3<T>	normalize(const Vec3<T> &vec3)
 {
 	T	dst = norm(vec3);
 
-	if (dst == T())
+	if (dst == static_cast<T>(0))
 		return (vec3);
 	return (vec3 / dst);
 }

@@ -184,8 +184,6 @@ public:
 
 	T	&operator[](const Vec2u &vec2)
 	{
-		if (vec2.x >= 3 || vec2.y >= 3)
-			throw std::runtime_error("Index out of mat3 bounds");
 		return (this->values[vec2.x + vec2.y * 3]);
 	}
 

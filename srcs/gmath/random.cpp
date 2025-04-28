@@ -10,7 +10,7 @@ static const double	RAND_MAX_D = static_cast<double>(RAND_MAX);
 
 //**** FUNCTIONS ***************************************************************
 
-void	initRandom(void)
+unsigned int	initRandom(void)
 {
 	srand(time(NULL));
 }

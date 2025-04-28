@@ -9,6 +9,14 @@ static const double	_180_PI = 180 / PI;
 
 //**** FUNCTIONS ***************************************************************
 
+/**
+ * @brief Return the minimum between two values.
+ *
+ * @param a First value.
+ * @param b Second value.
+ *
+ * @return Minimum between parameters
+ */
 template <typename T>
 T	min(const T &a, const T &b)
 {
@@ -18,6 +26,14 @@ T	min(const T &a, const T &b)
 }
 
 
+/**
+ * @brief Return the maximum between two values.
+ *
+ * @param a First value.
+ * @param b Second value.
+ *
+ * @return Maximum between parameters
+ */
 template <typename T>
 T	max(const T &a, const T &b)
 {
@@ -27,6 +43,13 @@ T	max(const T &a, const T &b)
 }
 
 
+/**
+ * @brief Make value absolute.
+ *
+ * @param value Input value.
+ *
+ * @return Absolute value of value.
+ */
 template <typename T>
 T	abs(const T &value)
 {
@@ -36,6 +59,14 @@ T	abs(const T &value)
 }
 
 
+/**
+ * @brief Basic positive integer power.
+ *
+ * @param value Number to make power.
+ * @param power Power to apply.
+ *
+ * @return Result of the power.
+ */
 template <typename T>
 T	pow(T value, unsigned int power)
 {
@@ -52,17 +83,31 @@ T	pow(T value, unsigned int power)
 }
 
 
+/**
+ * @brief Transform an angle in degrees to radians.
+ *
+ * @param degrees Angle in degrees.
+ *
+ * @return Angle in radians.
+ */
 template <typename T>
-T	toRadian(T degree)
+T	radians(T degrees)
 {
-	return (degree * PI_180);
+	return (degrees * PI_180);
 }
 
 
+/**
+ * @brief Transform an angle in radians to degrees.
+ *
+ * @param radians Angle in radians.
+ *
+ * @return Angle in degrees.
+ */
 template <typename T>
-T	toDegree(T radian)
+T	degrees(T radians)
 {
-	return (radian * _180_PI);
+	return (radians * _180_PI);
 }
 
 #endif
