@@ -192,7 +192,7 @@ namespace gm {
 			this->values[ 3] = T();
 
 			this->values[ 4] = T();
-			this->values[ 5] = sca`;
+			this->values[ 5] = scale;
 			this->values[ 6] = T();
 			this->values[ 7] = T();
 
