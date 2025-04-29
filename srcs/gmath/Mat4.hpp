@@ -516,6 +516,8 @@ namespace gm {
 		 * @param ratio The ratio of the screen (width / height).
 		 * @param near The closest distance in camera vison.
 		 * @param far The farest distance in camera vison.
+		 *
+		 * @return The perspective matrix.
 		 */
 		static Mat4<T>	perspective(T fovY, T ratio, T near, T far)
 		{
@@ -538,11 +540,13 @@ namespace gm {
 		}
 
 		/**
-		 * @brief Create a 4x4 model matrix.
+		 * @brief Create a 4x4 view matrix.
 		 *
 		 * @param eye Position of the camera.
-		 * @param center Position of the model.
+		 * @param center Position where the camera look at.
 		 * @param up Camera up direction normalize. Typically (0, 0, 1).
+		 *
+		 * @return The view matrix.
 		 */
 		static Mat4<T>	lookAt(const Vec3<T> &eye, const Vec3<T> &center, const Vec3<T> &up)
 		{
@@ -550,7 +554,7 @@ namespace gm {
 			const Vec3<T>	s(normalize(cross(f, up)));
 			const Vec3<T>	u(cross(s, f));
 
-			Mat4<T>	res;
+			Mat4<T>	res(static_cast<T>(1));
 
 			res.values[ 0] = s.x;
 			res.values[ 1] = s.y;

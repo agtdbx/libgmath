@@ -478,7 +478,9 @@ namespace gm {
 
 		if (dst == static_cast<T>(0) || dst == static_cast<T>(1))
 			return (vec4);
-		return (vec4 / static_cast<T>(sqrt(static_cast<double>(dst))));
+
+		T	toDiv = static_cast<T>(1) / static_cast<T>(sqrt(static_cast<double>(dst)));
+		return (vec4 * toDiv);
 	}
 
 	/**
