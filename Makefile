@@ -7,7 +7,7 @@ buildtest:
 	ninja -C build
 
 run: buildtest
-	./build/libmathTest
+	./build/libgmathTest
 
 fclean:
 	rm -rf build release
