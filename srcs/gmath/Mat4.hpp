@@ -512,7 +512,7 @@ namespace gm {
 		/**
 		 * @brief Create 4x4 perspective matrix.
 		 *
-		 * @param fovY The fov for camera height.
+		 * @param fovY The fov for camera height in radians.
 		 * @param ratio The ratio of the screen (width / height).
 		 * @param near The closest distance in camera vison.
 		 * @param far The farest distance in camera vison.
@@ -522,7 +522,7 @@ namespace gm {
 			Mat4<T>	res;
 
 			// Compute fov
-			T	tanFov = tan(radians(fovY / static_cast<T>(2)));
+			T	tanFov = tan(fovY / static_cast<T>(2));
 
 			// Scaling factor x * ratio because fov is for y
 			res.values[0] = static_cast<T>(1) / (tanFov * ratio);
@@ -531,8 +531,8 @@ namespace gm {
 
 			// Remap z in range [0, 1]
 			res.values[10] = far / (far - near);
-			res.values[11] = - static_cast<T>(1);
-			res.values[14] = - ((far * near) / (far - near));
+			res.values[11] = - ((far * near) / (far - near));
+			res.values[14] = - static_cast<T>(1);
 
 			return (res);
 		}
