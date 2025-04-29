@@ -10,65 +10,67 @@ static const double	RAND_MAX_D = static_cast<double>(RAND_MAX);
 
 //**** FUNCTIONS ***************************************************************
 
-unsigned int	initRandom(void)
-{
-	unsigned int	seed = time(NULL);
+namespace gm {
+	unsigned int	initRandom(void)
+	{
+		unsigned int	seed = time(NULL);
 
-	srand(seed);
+		srand(seed);
 
-	return (seed);
-}
-
-
-void	initRandom(unsigned int seed)
-{
-	srand(seed);
-}
+		return (seed);
+	}
 
 
-int	iRand(void)
-{
-	return (rand());
-}
+	void	initRandom(unsigned int seed)
+	{
+		srand(seed);
+	}
 
 
-int	iRand(int min, int max)
-{
-	return (rand() % (max - min) + min);
-}
+	int	iRand(void)
+	{
+		return (rand());
+	}
 
 
-unsigned int	uRand(void)
-{
-	return (static_cast<unsigned int>(rand()));
-}
+	int	iRand(int min, int max)
+	{
+		return (rand() % (max - min) + min);
+	}
 
 
-unsigned int	uRand(unsigned int min, unsigned int max)
-{
-	return (uRand() % (max - min) + min);
-}
+	unsigned int	uRand(void)
+	{
+		return (static_cast<unsigned int>(rand()));
+	}
 
 
-float	fRand(void)
-{
-	return (static_cast<float>(rand()) / RAND_MAX_F);
-}
+	unsigned int	uRand(unsigned int min, unsigned int max)
+	{
+		return (uRand() % (max - min) + min);
+	}
 
 
-float	fRand(float min, float max)
-{
-	return (min + fRand() * (max - min));
-}
+	float	fRand(void)
+	{
+		return (static_cast<float>(rand()) / RAND_MAX_F);
+	}
 
 
-double	dRand(void)
-{
-	return (static_cast<double>(rand()) / RAND_MAX_D);
-}
+	float	fRand(float min, float max)
+	{
+		return (min + fRand() * (max - min));
+	}
 
 
-double	dRand(double min, double max)
-{
-	return (min + dRand() * (max - min));
+	double	dRand(void)
+	{
+		return (static_cast<double>(rand()) / RAND_MAX_D);
+	}
+
+
+	double	dRand(double min, double max)
+	{
+		return (min + dRand() * (max - min));
+	}
 }

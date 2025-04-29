@@ -74,5 +74,25 @@ int	main(void)
 		gm::print(gm::transpose(mat4));
 	}
 
+	{
+		gm::initRandom();
+
+		std::cout << "Random vec2" << std::endl;
+		for (int i = 0; i < 5; i++)
+		{
+			gm::Vec2f	vec2 = gm::Vec2f::randomNormal();
+
+			std::cout << "vec2 : " << vec2 << ", norm : " << gm::norm(vec2) << std::endl;
+		}
+
+		std::cout << "Random vec3" << std::endl;
+		for (int i = 0; i < 5; i++)
+		{
+			gm::Vec3f	vec3 = gm::Vec3f::randomNormal();
+
+			std::cout << "vec3 : " << vec3 << ", norm : " << gm::norm(vec3) << std::endl;
+		}
+	}
+
 	return (0);
 }

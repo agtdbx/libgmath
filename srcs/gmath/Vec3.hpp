@@ -255,6 +255,23 @@ namespace gm {
 			return	(Vec2<T>(this->x, this->z));
 		}
 
+		//**** STATIC METHODS **************************************************
+
+		/**
+		 * @brief Create a random 3d normal.
+		 *
+		 * @return A random Vec3 normalized.
+		 */
+		static Vec3<T>	randomNormal(void)
+		{
+			double	alpha = dRand() * M_PI;
+			double	beta = dRand() * M_PI;
+			double	cosBeta = cos(beta);
+
+			return (Vec3<T>(static_cast<T>(cos(alpha) * cosBeta),
+							static_cast<T>(sin(alpha) * cosBeta),
+							static_cast<T>(sin(beta))));
+		}
 	private:
 
 	};

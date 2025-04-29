@@ -1,9 +1,11 @@
 #ifndef GM_VEC2_HPP
 # define GM_VEC2_HPP
 
-#include <cmath>
-#include <iostream>
-#include <stdexcept>
+# include <gmath/random.hpp>
+
+# include <cmath>
+# include <iostream>
+# include <stdexcept>
 
 namespace gm {
 	//**** STATIC FUNCTIONS DEFINE *********************************************
@@ -174,6 +176,22 @@ namespace gm {
 				return (this->y);
 
 			throw std::runtime_error("Index out of vec2 bounds");
+		}
+
+		//**** PUBLIC METHODS **************************************************
+		//**** STATIC METHODS **************************************************
+
+		/**
+		 * @brief Create a random 2d normal.
+		 *
+		 * @return A random Vec2 normalized.
+		 */
+		static Vec2<T>	randomNormal(void)
+		{
+			double	angle = dRand() * M_PI;
+
+			return (Vec2<T>(static_cast<T>(cos(angle)),
+							static_cast<T>(sin(angle))));
 		}
 
 	private:

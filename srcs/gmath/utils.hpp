@@ -1,11 +1,12 @@
 #ifndef GM_UTILS_HPP
 # define GM_UTILS_HPP
 
+# include <cmath>
+
 //**** VARIABLES ***************************************************************
 
-static const double	GM_PI = 3.14159265358979323846;
-static const double	GM_PI_180 = GM_PI / 180;
-static const double	GM_180_PI = 180 / GM_PI;
+static const double	GM_PI_180 = M_PI / 180;
+static const double	GM_180_PI = 180 / M_PI;
 
 //**** FUNCTIONS ***************************************************************
 
@@ -26,7 +27,6 @@ namespace gm {
 		return (b);
 	}
 
-
 	/**
 	 * @brief Return the maximum between two values.
 	 *
@@ -43,7 +43,6 @@ namespace gm {
 		return (b);
 	}
 
-
 	/**
 	 * @brief Make value absolute.
 	 *
@@ -54,11 +53,29 @@ namespace gm {
 	template <typename T>
 	T	abs(const T &value)
 	{
-		if (value < T())
+		if (value < static_cast<T>(0))
 			return (-value);
 		return (value);
 	}
 
+	/**
+	 * @brief Get sign of value.
+	 *
+	 * @param value Input value.
+	 *
+	 * @return Sign of value (-1, 1 or 0).
+	 */
+	template <typename T>
+	T	sign(const T &value)
+	{
+		T	zero = static_cast<T>(0);
+
+		if (value < zero)
+			return (static_cast<T>(-1));
+		else if (value > zero)
+			return (static_cast<T>(1));
+		return (zero);
+	}
 
 	/**
 	 * @brief Basic positive integer power.
@@ -83,7 +100,6 @@ namespace gm {
 		return (res);
 	}
 
-
 	/**
 	 * @brief Transform an angle in degrees to radians.
 	 *
@@ -96,7 +112,6 @@ namespace gm {
 	{
 		return (degrees * GM_PI_180);
 	}
-
 
 	/**
 	 * @brief Transform an angle in radians to degrees.
