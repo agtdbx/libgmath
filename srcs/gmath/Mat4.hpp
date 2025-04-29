@@ -435,14 +435,14 @@ namespace gm {
 		}
 
 		/**
-		 * @brief Create 4x4 perceptive matrix.
+		 * @brief Create 4x4 perspective matrix.
 		 *
 		 * @param fovY The fov for camera height.
 		 * @param ratio The ratio of the screen (width / height).
 		 * @param near The closest distance in camera vison.
 		 * @param far The farest distance in camera vison.
 		 */
-		static Mat4<T>	perceptive(T fovY, T ratio, T near, T far)
+		static Mat4<T>	perspective(T fovY, T ratio, T near, T far)
 		{
 			Mat4<T>	res;
 
