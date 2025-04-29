@@ -530,7 +530,7 @@ namespace gm {
 			res.values[5] = static_cast<T>(1) / tanFov;
 
 			// Remap z in range [0, 1]
-			res.values[10] = far / (far - near);
+			res.values[10] = - (far / (far - near));
 			res.values[11] = - ((far * near) / (far - near));
 			res.values[14] = - static_cast<T>(1);
 
