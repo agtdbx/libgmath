@@ -618,7 +618,7 @@ namespace gm {
 	template <typename T>
 	Mat4<T>	rotate(const Mat4<T> &mat4, const Vec3<T> &axis, T radians)
 	{
-		const Mat4<T>	matRot = Mat4<T>::rotation(axis, radians);
+		const Mat4<T>	matRot = Mat4<T>::rotation3D(axis, radians);
 
 		return (mat4 * matRot);
 	}
