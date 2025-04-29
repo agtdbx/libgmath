@@ -84,6 +84,21 @@ namespace gm {
 			this->values[3] = y2;
 		}
 
+		/**
+		 * @brief Constructor of Mat2 class scaling.
+		 *
+		 * @param scale Values in array form.
+		 *
+		 * @return Mat2 identity * scale.
+		 */
+		Mat2(T scale)
+		{
+			this->values[0] = scale;
+			this->values[1] = T();
+			this->values[2] = T();
+			this->values[3] = scale;
+		}
+
 		//---- Destructor ------------------------------------------------------
 
 		~Mat2()
@@ -120,6 +135,21 @@ namespace gm {
 		 * @return The reference of value at position (x,y).
 		 */
 		T	&at(unsigned int x, unsigned int y)
+		{
+			return (this->values[x + y * 2]);
+		}
+
+		/**
+		 * @brief Const accessor of Mat2.
+		 *
+		 * @warning No check of x and y, will crash if isn't in range [0, 1].
+		 *
+		 * @param x x index, must in range [0, 1].
+		 * @param y y index, must in range [0, 1].
+		 *
+		 * @return The const reference of value at position (x,y).
+		 */
+		const T	&at(unsigned int x, unsigned int y) const
 		{
 			return (this->values[x + y * 2]);
 		}
@@ -226,6 +256,22 @@ namespace gm {
 		}
 
 		/**
+		 * @brief Const access values by index.
+		 *
+		 * @param n The id of value in array style. Id is (x + y * 2).
+		 *
+		 * @return The const reference of value at array position n.
+		 * @exception Throw a runtime_error if n isn't in range [0, 3].
+		 */
+		const T	&operator[](unsigned int n) const
+		{
+			if (n >= GM_MAT2_SIZE)
+				throw std::runtime_error("Index out of mat2 bounds");
+
+			return (this->values[n]);
+		}
+
+		/**
 		 * @brief Access values by index.
 		 *
 		 * @warning No check of x and y, will crash if isn't in range [0, 1].
@@ -235,6 +281,20 @@ namespace gm {
 		 * @return The reference of value at position (x,y).
 		 */
 		T	&operator[](const Vec2u &vec2)
+		{
+			return (this->values[vec2.x + vec2.y * 2]);
+		}
+
+		/**
+		 * @brief Const Access values by index.
+		 *
+		 * @warning No check of x and y, will crash if isn't in range [0, 1].
+		 *
+		 * @param vec2 The index of value in Vec2u.
+		 *
+		 * @return The const reference of value at position (x,y).
+		 */
+		const T	&operator[](const Vec2u &vec2) const
 		{
 			return (this->values[vec2.x + vec2.y * 2]);
 		}
@@ -267,8 +327,8 @@ namespace gm {
 		static Mat2<T>	rotation(T radians)
 		{
 			Mat2<T>	res;
-			T		tmpCos = cos(radians);
-			T		tmpSin = sin(radians);
+			T		tmpCos = static_cast<T>(cos(static_cast<double>(radians)));
+			T		tmpSin = static_cast<T>(sin(static_cast<double>(radians)));
 
 			res.values[0] = tmpCos;
 			res.values[1] = -tmpSin;

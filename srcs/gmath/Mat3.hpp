@@ -115,6 +115,26 @@ namespace gm {
 			this->values[8] = T();
 		}
 
+		/**
+		 * @brief Constructor of Mat3 class scaling.
+		 *
+		 * @param scale Values in array form.
+		 *
+		 * @return Mat3 identity * scale.
+		 */
+		Mat3(T scale)
+		{
+			this->values[0] = scale;
+			this->values[1] = T();
+			this->values[2] = T();
+			this->values[3] = T();
+			this->values[4] = scale;
+			this->values[5] = T();
+			this->values[6] = T();
+			this->values[7] = T();
+			this->values[8] = scale;
+		}
+
 		//---- Destructor ------------------------------------------------------
 
 		~Mat3()
@@ -151,6 +171,21 @@ namespace gm {
 		 * @return The reference of value at position (x,y).
 		 */
 		T	&at(unsigned int x, unsigned int y)
+		{
+			return (this->values[x + y * 3]);
+		}
+
+		/**
+		 * @brief Const accessor of Mat3.
+		 *
+		 * @warning No check of x and y, will crash if isn't in range [0, 2].
+		 *
+		 * @param x x index, must in range [0, 2].
+		 * @param y y index, must in range [0, 2].
+		 *
+		 * @return The const reference of value at position (x,y).
+		 */
+		const T	&at(unsigned int x, unsigned int y) const
 		{
 			return (this->values[x + y * 3]);
 		}
@@ -257,6 +292,36 @@ namespace gm {
 		}
 
 		/**
+		 * @brief Const access values by index.
+		 *
+		 * @param n The id of value in array style. Id is (x + y * 3).
+		 *
+		 * @return The const reference of value at array position n.
+		 * @exception Throw a runtime_error if n isn't in range [0, 8].
+		 */
+		const T	&operator[](unsigned int n) const
+		{
+			if (n >= GM_MAT3_SIZE)
+				throw std::runtime_error("Index out of mat3 bounds");
+
+			return (this->values[n]);
+		}
+
+		/**
+		 * @brief Const access values by index.
+		 *
+		 * @warning No check of x and y, will crash if isn't in range [0, 2].
+		 *
+		 * @param vec2 The index of value in Vec2u.
+		 *
+		 * @return The const reference of value at position (x,y).
+		 */
+		const T	&operator[](const Vec2u &vec2) const
+		{
+			return (this->values[vec2.x + vec2.y * 3]);
+		}
+
+		/**
 		 * @brief Access values by index.
 		 *
 		 * @warning No check of x and y, will crash if isn't in range [0, 2].
@@ -318,8 +383,8 @@ namespace gm {
 		static Mat3<T>	rotation(const Vec3<T> &axis, T radians)
 		{
 			Mat3<T>	res;
-			T		tmpCos = cos(radians);
-			T		tmpSin = sin(radians);
+			T		tmpCos = static_cast<T>(cos(static_cast<double>(-radians)));
+			T		tmpSin = static_cast<T>(sin(static_cast<double>(-radians)));
 			T		invTmpCos = static_cast<T>(1) - tmpCos;
 			T		tmpSinAx = tmpSin * axis.x;
 			T		tmpSinAy = tmpSin * axis.y;

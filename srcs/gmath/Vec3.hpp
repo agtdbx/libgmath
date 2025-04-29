@@ -183,10 +183,35 @@ namespace gm {
 		 *
 		 * @param n Index of the value wanted.
 		 *
-		 * @return The value at the index.
+		 * @return The reference to value at the index.
 		 * @exception Throw runtime_error when index is greater than 2.
 		 */
 		T	&operator[](unsigned int n)
+		{
+			if (n == 0)
+				return (this->x);
+			if (n == 1)
+				return (this->y);
+			if (n == 2)
+				return (this->z);
+
+			throw std::runtime_error("Index out of vec3 bounds");
+		}
+
+		/**
+		 * @brief Const access values by index.
+		 *
+		 * Index 0 is for x.
+		 * Index 1 is for y.
+		 * Index 2 is for z.
+		 * Other index will return an exception.
+		 *
+		 * @param n Index of the value wanted.
+		 *
+		 * @return The const reference to value at the index.
+		 * @exception Throw runtime_error when index is greater than 2.
+		 */
+		const T	&operator[](unsigned int n) const
 		{
 			if (n == 0)
 				return (this->x);

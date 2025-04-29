@@ -177,6 +177,36 @@ namespace gm {
 			this->values[15] = T();
 		}
 
+		/**
+		 * @brief Constructor of Mat4 class scaling.
+		 *
+		 * @param scale Values in array form.
+		 *
+		 * @return Mat4 identity * scale.
+		 */
+		 Mat4(T scale)
+		 {
+			this->values[ 0] = scale;
+			this->values[ 1] = T();
+			this->values[ 2] = T();
+			this->values[ 3] = T();
+
+			this->values[ 4] = T();
+			this->values[ 5] = sca`;
+			this->values[ 6] = T();
+			this->values[ 7] = T();
+
+			this->values[ 8] = T();
+			this->values[ 9] = T();
+			this->values[10] = scale;
+			this->values[11] = T();
+
+			this->values[12] = T();
+			this->values[13] = T();
+			this->values[14] = T();
+			this->values[15] = scale;
+		 }
+
 		//---- Destructor ------------------------------------------------------
 
 		~Mat4()
@@ -213,6 +243,21 @@ namespace gm {
 		 * @return The reference of value at position (x,y).
 		 */
 		T	&at(unsigned int x, unsigned int y)
+		{
+			return (this->values[x + y * 4]);
+		}
+
+		/**
+		 * @brief Const accessor of Mat4.
+		 *
+		 * @warning No check of x and y, will crash if isn't in range [0, 3].
+		 *
+		 * @param x x index, must in range [0, 3].
+		 * @param y y index, must in range [0, 3].
+		 *
+		 * @return The const reference of value at position (x,y).
+		 */
+		const T	&at(unsigned int x, unsigned int y) const
 		{
 			return (this->values[x + y * 4]);
 		}
@@ -319,6 +364,22 @@ namespace gm {
 		}
 
 		/**
+		 * @brief Const access values by index.
+		 *
+		 * @param n The id of value in array style. Id is (x + y * 4).
+		 *
+		 * @return The const reference of value at array position n.
+		 * @exception Throw a runtime_error if n isn't in range [0, 15].
+		 */
+		const T	&operator[](unsigned int n) const
+		{
+			if (n >= GM_MAT4_SIZE)
+				throw std::runtime_error("Index out of mat4 bounds");
+
+			return (this->values[n]);
+		}
+
+		/**
 		 * @brief Access values by index.
 		 *
 		 * @warning No check of x and y, will crash if isn't in range [0, 3].
@@ -328,6 +389,20 @@ namespace gm {
 		 * @return The reference of value at position (x,y).
 		 */
 		T	&operator[](const Vec2u &vec2)
+		{
+			return (this->values[vec2.x + vec2.y * 4]);
+		}
+
+		/**
+		 * @brief Const access values by index.
+		 *
+		 * @warning No check of x and y, will crash if isn't in range [0, 3].
+		 *
+		 * @param vec2 The index of value in Vec2u.
+		 *
+		 * @return The const reference of value at position (x,y).
+		 */
+		const T	&operator[](const Vec2u &vec2) const
 		{
 			return (this->values[vec2.x + vec2.y * 4]);
 		}
@@ -400,11 +475,11 @@ namespace gm {
 		 *
 		 * @return 4x4 rotation matrix of parameter.
 		 */
-		static Mat4<T>	rotation3D(const Vec3<T> &axis, T radian)
+		static Mat4<T>	rotation3D(const Vec3<T> &axis, T radians)
 		{
 			Mat4<T>	res;
-			T		tmpCos = cos(radian);
-			T		tmpSin = sin(radian);
+			T		tmpCos = static_cast<T>(cos(static_cast<double>(-radians)));
+			T		tmpSin = static_cast<T>(sin(static_cast<double>(-radians)));
 			T		invTmpCos = static_cast<T>(1) - tmpCos;
 			T		tmpSinAx = tmpSin * axis.x;
 			T		tmpSinAy = tmpSin * axis.y;
