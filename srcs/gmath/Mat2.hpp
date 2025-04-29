@@ -435,6 +435,40 @@ namespace gm {
 	//**** FUNCTIONS ***********************************************************
 
 	/**
+	 * @brief Print a Mat2 in a beatiful format with cout.
+	 *
+	 * @param mat2 The Mat2 to print.
+	 */
+	template <typename T>
+	void	print(const Mat2<T> &mat2)
+	{
+		Mat2<T>	res;
+
+		std::cout	<< "|" << mat2.values[0] << ", " << mat2.values[1] << "|\n"
+					<< "|" << mat2.values[2] << ", " << mat2.values[3] << "|" << std::endl;
+	}
+
+	/**
+	 * @brief Transpose a Mat2.
+	 *
+	 * @param mat2 The Mat2 to transpose.
+	 *
+	 * @return Mat2 transposed.
+	 */
+	template <typename T>
+	Mat2<T>	transpose(const Mat2<T> &mat2)
+	{
+		Mat2<T>	res;
+
+		res.values[0] = mat2.values[0];
+		res.values[1] = mat2.values[2];
+		res.values[2] = mat2.values[1];
+		res.values[3] = mat2.values[3];
+
+		return (res);
+	}
+
+	/**
 	 * @brief Rotate a Mat2.
 	 *
 	 * @param mat2 The Mat2 to rotate.

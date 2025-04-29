@@ -533,8 +533,8 @@ namespace gm {
 
 			// Remap z in range [0, 1]
 			res.values[10] = - (far / (far - near));
-			res.values[11] = - ((far * near) / (far - near));
-			res.values[14] = - static_cast<T>(1);
+			res.values[11] = - static_cast<T>(1);
+			res.values[14] = - ((far * near) / (far - near));
 
 			return (res);
 		}
@@ -557,19 +557,19 @@ namespace gm {
 			Mat4<T>	res(static_cast<T>(1));
 
 			res.values[ 0] = s.x;
-			res.values[ 1] = s.y;
-			res.values[ 2] = s.z;
-			res.values[ 3] = -dot(s, eye);
+			res.values[ 4] = s.y;
+			res.values[ 8] = s.z;
+			res.values[12] = -dot(s, eye);
 
-			res.values[ 4] = u.x;
+			res.values[ 1] = u.x;
 			res.values[ 5] = u.y;
-			res.values[ 6] = u.z;
-			res.values[ 7] = -dot(u, eye);
+			res.values[ 9] = u.z;
+			res.values[13] = -dot(u, eye);
 
-			res.values[ 8] = -f.x;
-			res.values[ 9] = -f.y;
+			res.values[ 2] = -f.x;
+			res.values[ 6] = -f.y;
 			res.values[10] = -f.z;
-			res.values[11] = dot(f, eye);
+			res.values[14] = dot(f, eye);
 
 			return (res);
 		}
@@ -684,6 +684,54 @@ namespace gm {
 	}
 
 	//**** FUNCTIONS ***********************************************************
+
+	/**
+	 * @brief Print a Mat4 in a beatiful format with cout.
+	 *
+	 * @param mat4 The Mat4 to print.
+	 */
+	template <typename T>
+	void	print(const Mat4<T> &mat4)
+	{
+		Mat4<T>	res;
+
+		std::cout	<< "|" << mat4.values[ 0] << ", " << mat4.values[ 1] << ", " << mat4.values[ 2] << ", " << mat4.values[ 3] << "|\n"
+					<< "|" << mat4.values[ 4] << ", " << mat4.values[ 5] << ", " << mat4.values[ 6] << ", " << mat4.values[ 7] << "|\n"
+					<< "|" << mat4.values[ 8] << ", " << mat4.values[ 9] << ", " << mat4.values[10] << ", " << mat4.values[11] << "|\n"
+					<< "|" << mat4.values[12] << ", " << mat4.values[13] << ", " << mat4.values[14] << ", " << mat4.values[15] << "|" << std::endl;
+	}
+
+	/**
+	 * @brief Transpose a Mat4.
+	 *
+	 * @param mat4 The Mat4 to transpose.
+	 *
+	 * @return Mat4 transposed.
+	 */
+	template <typename T>
+	Mat4<T>	transpose(const Mat4<T> &mat4)
+	{
+		Mat4<T>	res;
+
+		res.values[ 0] = mat4.values[ 0];
+		res.values[ 1] = mat4.values[ 4];
+		res.values[ 2] = mat4.values[ 8];
+		res.values[ 3] = mat4.values[12];
+		res.values[ 4] = mat4.values[ 1];
+		res.values[ 5] = mat4.values[ 5];
+		res.values[ 6] = mat4.values[ 9];
+		res.values[ 7] = mat4.values[13];
+		res.values[ 8] = mat4.values[ 2];
+		res.values[ 9] = mat4.values[ 6];
+		res.values[10] = mat4.values[10];
+		res.values[11] = mat4.values[14];
+		res.values[12] = mat4.values[ 3];
+		res.values[13] = mat4.values[ 7];
+		res.values[14] = mat4.values[11];
+		res.values[15] = mat4.values[15];
+
+		return (res);
+	}
 
 	/**
 	 * @brief Rotate a Mat4 in 3D.

@@ -1,14 +1,7 @@
 #include <gmath.hpp>
 
-#include <vector>
-
 int	main(void)
 {
-	std::vector<int>	uwu;
-
-	uwu.push_back(0);
-	uwu[0] = 1;
-
 	{
 		gm::Vec2i vec2(4, 2);
 
@@ -51,12 +44,34 @@ int	main(void)
 		std::cout << pos << std::endl;
 		std::cout << (pos * rot) << std::endl;
 	}
+
 	{
 		gm::Mat4f	mat4(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16);
 
 		std::cout << mat4 << std::endl;
 		std::cout << gm::Mat4f::identity() << std::endl;
 		std::cout << mat4 * gm::Mat4f::identity() << std::endl;
+	}
+
+	{
+		gm::Mat2i	mat2(0, 1, 2, 3);
+		gm::Mat3i	mat3(0, 1, 2, 3, 4, 5, 6, 7, 8);
+		gm::Mat4i	mat4(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+
+		std::cout << "mat2 : " << std::endl;
+		gm::print(mat2);
+		std::cout << "mat2 transposed : " << std::endl;
+		gm::print(gm::transpose(mat2));
+
+		std::cout << "mat3 : " << std::endl;
+		gm::print(mat3);
+		std::cout << "mat3 transposed : " << std::endl;
+		gm::print(gm::transpose(mat3));
+
+		std::cout << "mat4 : " << std::endl;
+		gm::print(mat4);
+		std::cout << "mat4 transposed : " << std::endl;
+		gm::print(gm::transpose(mat4));
 	}
 
 	return (0);
