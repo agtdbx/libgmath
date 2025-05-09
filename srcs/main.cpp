@@ -18,6 +18,7 @@ int	main(void)
 		std::cout << m2 + gm::Mat2i::identity() << std::endl;
 		std::cout << m2 * 2 << std::endl;
 		std::cout << (vec2 * gm::Mat2i::identity()) << std::endl;
+		std::cout << gm::Vec2f(1.2f) << std::endl;
 	}
 
 	{

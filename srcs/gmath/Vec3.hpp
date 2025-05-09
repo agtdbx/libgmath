@@ -100,6 +100,20 @@ namespace gm {
 			this->z = z;
 		}
 
+		/**
+		 * @brief Constructor of Vec3 class.
+		 *
+		 * @param value x, y and z values of Vec3.
+		 *
+		 * @return The Vec3 with parameter value.
+		 */
+		Vec3(T value)
+		{
+			this->x = value;
+			this->y = value;
+			this->z = value;
+		}
+
 		//---- Destructor ------------------------------------------------------
 
 		~Vec3()

@@ -66,6 +66,19 @@ namespace gm {
 			this->y = y;
 		}
 
+		/**
+		 * @brief Constructor of Vec2 class.
+		 *
+		 * @param value x and y values of Vec2.
+		 *
+		 * @return The Vec2 with parameter value.
+		 */
+		Vec2(T value)
+		{
+			this->x = value;
+			this->y = value;
+		}
+
 		//---- Destructor ------------------------------------------------------
 
 		~Vec2()

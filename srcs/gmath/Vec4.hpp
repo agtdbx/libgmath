@@ -156,6 +156,21 @@ namespace gm {
 			this->w = w;
 		}
 
+		/**
+		 * @brief Constructor of Vec4 class.
+		 *
+		 * @param value x, y, z and w values of Vec4.
+		 *
+		 * @return The Vec4 with parameter value.
+		 */
+		Vec4(T value)
+		{
+			this->x = value;
+			this->y = value;
+			this->z = value;
+			this->w = value;
+		}
+
 		//---- Destructor ------------------------------------------------------
 
 		~Vec4()
