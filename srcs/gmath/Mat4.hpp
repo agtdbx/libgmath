@@ -510,6 +510,24 @@ namespace gm {
 		}
 
 		/**
+		 * @brief Create 4x4 translation matrix.
+		 *
+		 * @param movement Vec3 for the translation to apply.
+		 *
+		 * @return 4x4 translation matrix of parameter.
+		 */
+		static Mat4<T>	translation(const Vec3<T> &movement)
+		{
+			Mat4<T>	res(static_cast<T>(1));
+
+			res.values[3] = movement.x;
+			res.values[7] = movement.y;
+			res.values[11] = movement.z;
+
+			return (res);
+		}
+
+		/**
 		 * @brief Create 4x4 perspective matrix.
 		 *
 		 * @param fovY The fov for camera height in radians.
@@ -748,6 +766,22 @@ namespace gm {
 		const Mat4<T>	matRot = Mat4<T>::rotation3D(axis, radians);
 
 		return (mat4 * matRot);
+	}
+
+	/**
+	 * @brief Translate a Mat4.
+	 *
+	 * @param mat3 The Mat4 to translate.
+	 * @param movement Vec3 for the translation to apply.
+	 *
+	 * @return Mat4 translate by movement vector.
+	 */
+	template <typename T>
+	Mat4<T>	translate(const Mat4<T> &mat3, const Vec3<T> &movement)
+	{
+		const Mat4<T>	matTranslate = Mat4<T>::translate(movement);
+
+		return (mat3 * matTranslate);
 	}
 
 	//**** STATIC FUNCTIONS ****************************************************

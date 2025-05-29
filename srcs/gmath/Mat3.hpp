@@ -406,6 +406,23 @@ namespace gm {
 			return (res);
 		}
 
+		/**
+		 * @brief Create 3x3 translation matrix.
+		 *
+		 * @param movement Vec2 for the translation to apply.
+		 *
+		 * @return 3x3 translation matrix of parameter.
+		 */
+		static Mat3<T>	translation(const Vec2<T> &movement)
+		{
+			Mat3<T>	res(static_cast<T>(1));
+
+			res.values[2] = movement.x;
+			res.values[5] = movement.y;
+
+			return (res);
+		}
+
 	private:
 
 	};
@@ -564,6 +581,22 @@ namespace gm {
 		const Mat3<T>	matRot = Mat3<T>::rotation(axis, radians);
 
 		return (mat3 * matRot);
+	}
+
+	/**
+	 * @brief Translate a Mat3.
+	 *
+	 * @param mat3 The Mat3 to translate.
+	 * @param movement Vec2 for the translation to apply.
+	 *
+	 * @return Mat3 translate by movement vector.
+	 */
+	template <typename T>
+	Mat3<T>	translate(const Mat3<T> &mat3, const Vec2<T> &movement)
+	{
+		const Mat3<T>	matTranslate = Mat3<T>::translate(movement);
+
+		return (mat3 * matTranslate);
 	}
 
 	//**** STATIC FUNCTIONS ****************************************************
