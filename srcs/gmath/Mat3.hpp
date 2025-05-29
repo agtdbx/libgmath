@@ -336,6 +336,25 @@ namespace gm {
 		}
 
 		//**** PUBLIC METHODS **************************************************
+		/**
+		 * @brief Get the determinant of the matrix.
+		 *
+		 * @return The determinant of the matrix.
+		 */
+		T	determinant(void) const
+		{
+			T	num0 = this->values[0];
+			T	det0 = (this->values[4] * this->values[8]) -
+						(this->values[5] * this->values[7]);
+			T	num1 = this->values[1];
+			T	det1 = (this->values[3] * this->values[8]) -
+						(this->values[5] * this->values[6]);
+			T	num2 = this->values[2];
+			T	det2 = (this->values[3] * this->values[7]) -
+						(this->values[4] * this->values[6]);
+
+			return ((num0 * det0) - (num1 * det1) + (num2 * det2));
+		}
 
 		/**
 		 * @brief Create a Mat2 from a subpart of the Mat3.

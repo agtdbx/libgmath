@@ -15,6 +15,7 @@
 # include <gmath/Mat2.hpp>
 # include <gmath/Mat3.hpp>
 # include <gmath/Mat4.hpp>
+# include <gmath/inverse.hpp>
 
 // Vector matrix operations
 # include <gmath/VecMat.hpp>

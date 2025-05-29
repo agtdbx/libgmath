@@ -300,6 +300,17 @@ namespace gm {
 		}
 
 		//**** PUBLIC METHODS **************************************************
+		/**
+		 * @brief Get the determinant of the matrix.
+		 *
+		 * @return The determinant of the matrix.
+		 */
+		T	determinant(void) const
+		{
+			return ((this->values[0] * this->values[3])
+					- (this->values[1] * this->values[2]));
+		}
+
 		//**** STATIC METHODS **************************************************
 
 		/**

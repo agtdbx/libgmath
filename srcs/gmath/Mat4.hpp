@@ -408,6 +408,62 @@ namespace gm {
 		}
 
 		//**** PUBLIC METHODS **************************************************
+		/**
+		 * @brief Get the determinant of the matrix.
+		 *
+		 * @return The determinant of the matrix.
+		 */
+		T	determinant(void) const
+		{
+			// Det a
+			T	numA0 = this->values[5];
+			T	detA0 = (this->values[10] * this->values[15]) -
+						(this->values[11] * this->values[14]);
+			T	numA1 = this->values[6];
+			T	detA1 = (this->values[ 9] * this->values[15]) -
+						(this->values[11] * this->values[13]);
+			T	numA2 = this->values[7];
+			T	detA2 = (this->values[ 9] * this->values[14]) -
+						(this->values[10] * this->values[13]);
+			T	numA = this->values[0];
+			T	detA = (numA0 * detA0) - (numA1 * detA1) + (numA2 * detA2);
+
+			// Det b
+			T	numB0 = this->values[4];
+			T	detB0 = detA0;
+			T	numB1 = this->values[6];
+			T	detB1 = (this->values[ 8] * this->values[15]) -
+						(this->values[11] * this->values[12]);
+			T	numB2 = this->values[7];
+			T	detB2 = (this->values[ 8] * this->values[14]) -
+						(this->values[10] * this->values[12]);
+			T	numB = this->values[1];
+			T	detB = (numB0 * detB0) - (numB1 * detB1) + (numB2 * detB2);
+
+			// Det c
+			T	numC0 = this->values[4];
+			T	detC0 = detA1;
+			T	numC1 = this->values[5];
+			T	detC1 = detB1;
+			T	numC2 = this->values[7];
+			T	detC2 = (this->values[ 8] * this->values[13]) -
+						(this->values[ 9] * this->values[12]);
+			T	numC = this->values[2];
+			T	detC = (numC0 * detC0) - (numC1 * detC1) + (numC2 * detC2);
+
+			// Det d
+			T	numD0 = this->values[4];
+			T	detD0 = detA2;
+			T	numD1 = this->values[5];
+			T	detD1 = detB2;
+			T	numD2 = this->values[6];
+			T	detD2 = detC2;
+			T	numD = this->values[3];
+			T	detD = (numD0 * detD0) - (numD1 * detD1) + (numD2 * detD2);
+
+			// Det mat
+			return ((numA * detA) - (numB * detB) + (numC * detC) - (numD * detD));
+		}
 
 		/**
 		 * @brief Create a Mat2 from a subpart of the Mat4.
