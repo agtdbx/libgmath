@@ -118,7 +118,7 @@ namespace gm {
 		const	T	one = static_cast<T>(1);
 
 		int		diag = 0;
-		int		diagVal = 0;
+		T		diagVal;
 		int		y;
 		T		tmp;
 

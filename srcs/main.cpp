@@ -122,7 +122,8 @@ int	main(void)
 		std::cout << "mat2 * inv2 :" << std::endl;
 		gm::print(mat2 * inv2);
 
-		gm::Mat3f mat3(42, 21, 1, -8, 1, 0, 5, 7, 8);
+		// gm::Mat3f mat3(42, 21, 1, -8, 1, 0, 5, 7, 8);
+		gm::Mat3f mat3(1, 0, 0, 0, 1, 0, 0, 0, 1);
 		std::cout << "mat3 :" << std::endl;
 		gm::print(mat3);
 		gm::Mat3f inv3 = gm::inverse(mat3);
