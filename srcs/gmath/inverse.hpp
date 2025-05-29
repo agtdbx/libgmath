@@ -108,7 +108,6 @@ namespace gm {
 	template <template<class> class MAT, typename T>
 	MAT<T>	__inverse(int size, const MAT<T> &mat)
 	{
-		std::cout << "det : " << mat.determinant() << std::endl;
 		if (mat.determinant() == static_cast<T>(0))
 			throw std::runtime_error("Matrix cannot be inverse");
 
