@@ -827,17 +827,17 @@ namespace gm {
 	/**
 	 * @brief Translate a Mat4.
 	 *
-	 * @param mat3 The Mat4 to translate.
+	 * @param mat4 The Mat4 to translate.
 	 * @param movement Vec3 for the translation to apply.
 	 *
 	 * @return Mat4 translate by movement vector.
 	 */
 	template <typename T>
-	Mat4<T>	translate(const Mat4<T> &mat3, const Vec3<T> &movement)
+	Mat4<T>	translate(const Mat4<T> &mat4, const Vec3<T> &movement)
 	{
-		const Mat4<T>	matTranslate = Mat4<T>::translate(movement);
+		const Mat4<T>	matTranslate = Mat4<T>::translation(movement);
 
-		return (mat3 * matTranslate);
+		return (mat4 * matTranslate);
 	}
 
 	//**** STATIC FUNCTIONS ****************************************************

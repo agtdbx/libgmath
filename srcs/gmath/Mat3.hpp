@@ -613,7 +613,7 @@ namespace gm {
 	template <typename T>
 	Mat3<T>	translate(const Mat3<T> &mat3, const Vec2<T> &movement)
 	{
-		const Mat3<T>	matTranslate = Mat3<T>::translate(movement);
+		const Mat3<T>	matTranslate = Mat3<T>::translation(movement);
 
 		return (mat3 * matTranslate);
 	}
