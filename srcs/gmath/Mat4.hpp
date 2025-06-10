@@ -840,6 +840,24 @@ namespace gm {
 		return (mat4 * matTranslate);
 	}
 
+	/**
+	 * @brief Get the hash of a Mat4.
+	 *
+	 * @param mat4 Mat4 to hash.
+	 *
+	 * @return Hash of Mat4.
+	 */
+	template <typename T>
+	std::size_t	hash(const Mat4<T> &mat4)
+	{
+		std::size_t	hash = 0;
+
+		for (int i = 0; i < GM_MAT4_SIZE; i++)
+			hash = std::hash<T>{}(mat4.values[i]) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+
+		return (hash);
+	}
+
 	//**** STATIC FUNCTIONS ****************************************************
 	//**** USINGS **************************************************************
 

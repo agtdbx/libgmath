@@ -512,6 +512,26 @@ namespace gm {
 		return (v1.x * v2.x + v1.y * v2.y + v1.z * v2.z + v1.w * v2.w);
 	}
 
+	/**
+	 * @brief Get the hash of a Vec4.
+	 *
+	 * @param vec4 Vec4 to hash.
+	 *
+	 * @return Hash of Vec4.
+	 */
+	template <typename T>
+	std::size_t	hash(const Vec4<T> &vec4)
+	{
+		std::size_t	hash = 0;
+
+		hash = std::hash<T>{}(vec4.x) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+		hash = std::hash<T>{}(vec4.y) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+		hash = std::hash<T>{}(vec4.z) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+		hash = std::hash<T>{}(vec4.w) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+
+		return (hash);
+	}
+
 	//**** STATIC FUNCTIONS ****************************************************
 	//**** USINGS **************************************************************
 	//---- VEC4 ----------------------------------------------------------------

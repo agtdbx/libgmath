@@ -618,6 +618,24 @@ namespace gm {
 		return (mat3 * matTranslate);
 	}
 
+	/**
+	 * @brief Get the hash of a Mat3.
+	 *
+	 * @param mat3 Mat3 to hash.
+	 *
+	 * @return Hash of Mat3.
+	 */
+	template <typename T>
+	std::size_t	hash(const Mat3<T> &mat3)
+	{
+		std::size_t	hash = 0;
+
+		for (int i = 0; i < GM_MAT3_SIZE; i++)
+			hash = std::hash<T>{}(mat3.values[i]) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+
+		return (hash);
+	}
+
 	//**** STATIC FUNCTIONS ****************************************************
 	//**** USINGS **************************************************************
 

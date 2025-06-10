@@ -495,6 +495,24 @@ namespace gm {
 		return (mat2 * matRot);
 	}
 
+	/**
+	 * @brief Get the hash of a Mat2.
+	 *
+	 * @param mat2 Mat2 to hash.
+	 *
+	 * @return Hash of Mat2.
+	 */
+	template <typename T>
+	std::size_t	hash(const Mat2<T> &mat2)
+	{
+		std::size_t	hash = 0;
+
+		for (int i = 0; i < GM_MAT2_SIZE; i++)
+			hash = std::hash<T>{}(mat2.values[i]) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+
+		return (hash);
+	}
+
 	//**** STATIC FUNCTIONS ****************************************************
 	//**** USINGS **************************************************************
 

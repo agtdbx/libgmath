@@ -317,6 +317,24 @@ namespace gm {
 		return (v1.x * v2.x + v1.y * v2.y);
 	}
 
+	/**
+	 * @brief Get the hash of a Vec2.
+	 *
+	 * @param vec2 Vec2 to hash.
+	 *
+	 * @return Hash of Vec2.
+	 */
+	template <typename T>
+	std::size_t	hash(const Vec2<T> &vec2)
+	{
+		std::size_t	hash = 0;
+
+		hash = std::hash<T>{}(vec2.x) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+		hash = std::hash<T>{}(vec2.y) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+
+		return (hash);
+	}
+
 	//**** STATIC FUNCTIONS ****************************************************
 	//**** USINGS **************************************************************
 	//---- VEC2 ----------------------------------------------------------------

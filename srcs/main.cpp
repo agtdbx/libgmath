@@ -142,5 +142,24 @@ int	main(void)
 		gm::print(mat4 * inv4);
 	}
 
+	{
+		gm::Vec2i vec2(0, 1);
+		std::cout << "vec2 : " << vec2 << ", hash : " << gm::hash(vec2) << std::endl;
+		gm::Vec3f vec3(42.0f, -2.0f, -451.5f);
+		std::cout << "vec3 : " << vec3 << ", hash : " << gm::hash(vec3) << std::endl;
+		gm::Vec4u vec4(100, 1000, 10, 1);
+		std::cout << "vec4 : " << vec4 << ", hash : " << gm::hash(vec4) << std::endl;
+
+		gm::Mat2f mat2(1, 2, 3, 4);
+		std::cout << "mat2 hash : " << gm::hash(mat2) << ", mat2 :" << std::endl;
+		gm::print(mat2);
+		gm::Mat3f mat3(1, 0, 0, 0, 1, 0, 0, 0, 1);
+		std::cout << "mat3 hash : " << gm::hash(mat3) << ", mat3 :" << std::endl;
+		gm::print(mat3);
+		gm::Mat4f mat4(2, 1, 4, 2, 6, 9, 9, 9, 0, 0, 1, 2, 3, 4, 5, 3);
+		std::cout << "mat4 hash : " << gm::hash(mat4) << ", mat4 :" << std::endl;
+		gm::print(mat4);
+	}
+
 	return (0);
 }
