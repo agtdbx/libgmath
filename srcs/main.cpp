@@ -161,5 +161,10 @@ int	main(void)
 		gm::print(mat4);
 	}
 
+	{
+		gm::Vec2i vec2(0, 1);
+		std::cout << "vec2 : " << vec2 << ", -vec2 : " << -vec2 << std::endl;
+	}
+
 	return (0);
 }

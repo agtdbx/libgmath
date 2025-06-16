@@ -247,6 +247,13 @@ namespace gm {
 			return (this->x != vec4.x || this->y != vec4.y || this->z != vec4.z || this->w != vec4.w);
 		}
 
+		//---- Unary Operators -------------------------------------------------
+
+		Vec4	operator-(void) const
+		{
+			return (Vec4(-this->x, -this->y, -this->z, -this->w));
+		}
+
 		//---- Accessor Operators ----------------------------------------------
 
 		/**

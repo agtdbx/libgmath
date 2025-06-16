@@ -185,6 +185,13 @@ namespace gm {
 			return (this->x != vec3.x || this->y != vec3.y || this->z != vec3.z);
 		}
 
+		//---- Unary Operators -------------------------------------------------
+
+		Vec3	operator-(void) const
+		{
+			return (Vec3(-this->x, -this->y, -this->z));
+		}
+
 		//---- Accessor Operators ----------------------------------------------
 
 		/**

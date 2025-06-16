@@ -145,6 +145,13 @@ namespace gm {
 			return (this->x != vec2.x || this->y != vec2.y);
 		}
 
+		//---- Unary Operators -------------------------------------------------
+
+		Vec2	operator-(void) const
+		{
+			return (Vec2(-this->x, -this->y));
+		}
+
 		//---- Accessor Operators ----------------------------------------------
 
 		/**
