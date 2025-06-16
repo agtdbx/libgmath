@@ -154,6 +154,22 @@ namespace gm {
 			return (this->values[x + y * 2]);
 		}
 
+		/**
+		 * @brief Row accessor of Mat2.
+		 *
+		 * @warning No check of y, will crash if isn't in range [0, 1].
+		 *
+		 * @param y y index, must in range [0, 1].
+		 *
+		 * @return The row at row pos y as a Vec2.
+		 */
+		Vec2<T>	row(unsigned int y) const
+		{
+			unsigned int	id = y * 2;
+			return (Vec2<T>(this->values[id],
+							this->values[id + 1]));
+		}
+
 		//---- Setters ---------------------------------------------------------
 
 		/**

@@ -159,6 +159,10 @@ int	main(void)
 		gm::Mat4f mat4(2, 1, 4, 2, 6, 9, 9, 9, 0, 0, 1, 2, 3, 4, 5, 3);
 		std::cout << "mat4 hash : " << gm::hash(mat4) << ", mat4 :" << std::endl;
 		gm::print(mat4);
+		std::cout << "mat4.row(0) : " << mat4.row(0) << std::endl;
+		std::cout << "mat4.row(1) : " << mat4.row(1) << std::endl;
+		std::cout << "mat4.row(2) : " << mat4.row(2) << std::endl;
+		std::cout << "mat4.row(3) : " << mat4.row(3) << std::endl;
 	}
 
 	{

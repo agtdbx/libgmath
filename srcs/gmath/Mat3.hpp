@@ -190,6 +190,23 @@ namespace gm {
 			return (this->values[x + y * 3]);
 		}
 
+		/**
+		 * @brief Row accessor of Mat3.
+		 *
+		 * @warning No check of y, will crash if isn't in range [0, 2].
+		 *
+		 * @param y y index, must in range [0, 2].
+		 *
+		 * @return The row at row pos y as a Vec3.
+		 */
+		Vec3<T>	row(unsigned int y) const
+		{
+			unsigned int	id = y * 3;
+			return (Vec3<T>(this->values[id],
+							this->values[id + 1],
+							this->values[id + 2]));
+		}
+
 		//---- Setters ---------------------------------------------------------
 
 		/**

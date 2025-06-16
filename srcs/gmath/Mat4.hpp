@@ -262,6 +262,24 @@ namespace gm {
 			return (this->values[x + y * 4]);
 		}
 
+		/**
+		 * @brief Row accessor of Mat4.
+		 *
+		 * @warning No check of y, will crash if isn't in range [0, 3].
+		 *
+		 * @param y y index, must in range [0, 3].
+		 *
+		 * @return The row at row pos y as a Vec4.
+		 */
+		Vec4<T>	row(unsigned int y) const
+		{
+			unsigned int	id = y * 4;
+			return (Vec4<T>(this->values[id],
+							this->values[id + 1],
+							this->values[id + 2],
+							this->values[id + 3]));
+		}
+
 		//---- Setters ---------------------------------------------------------
 
 		/**
