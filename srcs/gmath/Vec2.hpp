@@ -342,6 +342,24 @@ namespace gm {
 		return (hash);
 	}
 
+	/**
+	 * @brief Get the hash of a Vec2 with small value for avoiding collision.
+	 *
+	 * @param vec2 Vec2 to hash.
+	 *
+	 * @return Hash of Vec2.
+	 */
+	template <typename T>
+	std::size_t	hashSmall(const Vec2<T> &vec2)
+	{
+		std::size_t	hash = 0;
+
+		hash = std::hash<T>{}(vec2.x  * T(1000)) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+		hash = std::hash<T>{}(vec2.y  * T(1000)) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+
+		return (hash);
+	}
+
 	//**** STATIC FUNCTIONS ****************************************************
 	//**** USINGS **************************************************************
 	//---- VEC2 ----------------------------------------------------------------

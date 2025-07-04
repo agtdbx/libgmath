@@ -539,6 +539,26 @@ namespace gm {
 		return (hash);
 	}
 
+	/**
+	 * @brief Get the hash of a Vec4 with small value for avoiding collision.
+	 *
+	 * @param vec4 Vec4 to hash.
+	 *
+	 * @return Hash of Vec4.
+	 */
+	template <typename T>
+	std::size_t	hashSmall(const Vec4<T> &vec4)
+	{
+		std::size_t	hash = 0;
+
+		hash = std::hash<T>{}(vec4.x  * T(1000)) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+		hash = std::hash<T>{}(vec4.y  * T(1000)) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+		hash = std::hash<T>{}(vec4.z  * T(1000)) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+		hash = std::hash<T>{}(vec4.w  * T(1000)) + 0x9e3779b9 + (hash<<6) + (hash>>2);
+
+		return (hash);
+	}
+
 	//**** STATIC FUNCTIONS ****************************************************
 	//**** USINGS **************************************************************
 	//---- VEC4 ----------------------------------------------------------------
