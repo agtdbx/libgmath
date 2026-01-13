@@ -20,4 +20,7 @@
 // Vector matrix operations
 # include <gmath/VecMat.hpp>
 
+// Include perlin noise
+# include <gmath/PerlinNoise.hpp>
+
 #endif

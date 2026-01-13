@@ -170,5 +170,18 @@ int	main(void)
 		std::cout << "vec2 : " << vec2 << ", -vec2 : " << -vec2 << std::endl;
 	}
 
+	{
+		gm::PerlinNoisef	perlinNoisef;
+		gm::PerlinNoised	perlinNoised;
+		std::cout << "seed 42, x 2.1, y 4.2, float  : " << perlinNoisef.getNoise(2.1f, 4.2f) << std::endl;
+		std::cout << "seed 42, x 2.1, y 4.2, double : " << perlinNoised.getNoise(2.1, 4.2) << std::endl;
+
+		std::cout << "default seed : " << perlinNoisef.getSeed() << std::endl;
+		std::cout << "default octaves : " << perlinNoisef.getOctaves() << std::endl;
+		std::cout << "default persistence : " << perlinNoisef.getPersistence() << std::endl;
+		std::cout << "default shape : " << perlinNoisef.getShape() << std::endl;
+
+	}
+
 	return (0);
 }
